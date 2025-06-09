@@ -1,0 +1,87 @@
+<template>
+  <div class="slds-box slds-theme_default slds-m-around_medium">
+
+    <c-deploy-header
+      title={headerTitle}
+      subtitle={headerSubtitle}
+      icon-name="standard:custom"
+      alternative-text={headerAltText}
+    ></c-deploy-header>
+
+    <div class="slds-m-bottom_medium">
+      <div class="slds-border_bottom slds-m-bottom_small">
+        <h3 class="slds-text-title_caps slds-p-vertical_x-small">{visibilitySectionTitle}</h3>
+      </div>
+      <div class="slds-form">
+        <lightning-input
+          type="checkbox"
+          label={retrieveComponentsLabel}
+          checked={retrieveComponents}
+          onchange={handleRetrieveComponentsChange}>
+        </lightning-input>
+
+        <lightning-input
+          type="checkbox"
+          label={retrieveTestsLabel}
+          checked={retrieveTests}
+          onchange={handleRetrieveTestsChange}>
+        </lightning-input>
+
+        <lightning-input
+          type="checkbox"
+          label={retrieveIntermediateLabel}
+          checked={retrieveIntermediateStates}
+          onchange={handleRetrieveIntermediateChange}>
+        </lightning-input>
+      </div>
+    </div>
+
+    <div class="slds-m-bottom_medium">
+      <div class="slds-border_bottom slds-m-bottom_small">
+        <h3 class="slds-text-title_caps slds-p-vertical_x-small">{executionSectionTitle}</h3>
+      </div>
+      <div class="slds-form">
+        <div class="slds-size_3-of-12">
+          <lightning-input
+            type="number"
+            label={batchSizeLabel}
+            value={batchSize}
+            min="1"
+            max="100"
+            required
+            placeholder={batchSizePlaceholder}
+            message-when-range-overflow={batchSizeOverflowMsg}
+            message-when-range-underflow={batchSizeUnderflowMsg}
+            onchange={handleBatchSizeChange}>
+          </lightning-input>
+        </div>
+
+        <div class="slds-size_3-of-12">
+          <lightning-combobox
+            label={namedCredentialLabel}
+            value={namedCredential}
+            options={namedCredentialOptions}
+            required
+            placeholder={namedCredentialPlaceholder}
+            onchange={handleNamedCredentialChange}>
+          </lightning-combobox>
+        </div>  
+      </div>
+    </div>
+
+    <div class="slds-m-top_medium">
+      <lightning-button
+        variant="brand"
+        label={saveButtonLabel}
+        onclick={handleSave}
+        disabled={isSaveDisabled}>
+      </lightning-button>
+
+      <template if:true={isLoading}>
+        <div class="slds-m-top_medium slds-align_absolute-center">
+          <lightning-spinner size="medium" alternative-text={spinnerAltText}></lightning-spinner>
+        </div>
+      </template>
+    </div>
+  </div>
+</template>

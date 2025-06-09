@@ -1,0 +1,71 @@
+<template>
+  <div class="slds-box slds-theme_default slds-m-around_medium">
+    <c-deploy-header
+      title="Synchronization Settings"
+      subtitle="Retrieve deployment results from Salesforce into this org."
+      icon-name="standard:data_transforms"
+      alternative-text="Synchronization"
+    ></c-deploy-header>
+
+    <div class="slds-border_bottom slds-m-bottom_small">
+      <h3 class="slds-text-title_caps slds-p-vertical_x-small">Sync Details Options</h3>
+    </div>  
+
+    <div class="slds-form">
+      <div class="slds-grid slds-gutters">
+        <div class="slds-col slds-size_1-of-6">
+        <lightning-input
+          type="date"
+          label={startDateLabel}
+          value={startDate}
+          onchange={handleStartDateChange}
+          placeholder={startDatePlaceholder}
+          min={minStartDate}
+          max={maxStartDate}
+          message-when-range-overflow={startDateOverflowMessage}
+          message-when-range-underflow={startDateMessage}
+        ></lightning-input>
+        </div>
+        <div class="slds-col slds-size_1-of-6">
+          <lightning-input
+            type="date"
+            label={endDateLabel}
+            value={endDate}
+            placeholder={endDatePlaceholder}
+            max={maxEndDate}
+            message-when-range-overflow={endDateMessage}
+            onchange={handleEndDateChange}
+          ></lightning-input>
+        </div>
+      </div>
+
+      <template if:true={isLoading}>
+        <div class="slds-m-top_medium">
+          <lightning-progress-bar
+            value={progressValue}
+            size="medium"
+            class="slds-m-bottom_small"
+          ></lightning-progress-bar>
+        </div>
+      </template>
+
+      <div class="slds-m-top_medium">
+        <lightning-button
+          variant="brand"
+          label={syncButtonLabel}
+          onclick={handleSync}
+          disabled={isSyncDisabled}
+        ></lightning-button>
+
+        <template if:true={isLoading}>
+          <div class="slds-m-top_medium slds-align_absolute-center">
+            <lightning-spinner
+              size="medium"
+              alternative-text={spinnerAltText}
+            ></lightning-spinner>
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
+</template>

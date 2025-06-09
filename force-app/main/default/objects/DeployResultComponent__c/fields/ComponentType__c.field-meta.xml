@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ComponentType__c</fullName>
+    <description>Metadata type of the component (e.g., ApexClass, LightningComponentBundle).</description>
+    <label>Component Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CallCenter</fullName>
+                <default>false</default>
+                <label>☎️ Call Center</label>
+            </value>
+            <value>
+                <fullName>ApexTrigger</fullName>
+                <default>false</default>
+                <label>⚙️ Apex Trigger</label>
+            </value>
+            <value>
+                <fullName>GenerativeAIPromptTemplateActivation</fullName>
+                <default>false</default>
+                <label>⚡ Gen AI Prompt Template Activation</label>
+            </value>
+            <value>
+                <fullName>LightningBolt</fullName>
+                <default>false</default>
+                <label>⚡ Lightning Bolt</label>
+            </value>
+            <value>
+                <fullName>ApprovalProcess</fullName>
+                <default>false</default>
+                <label>✅ Approval Process</label>
+            </value>
+            <value>
+                <fullName>SendAction</fullName>
+                <default>false</default>
+                <label>✉️ Send Action</label>
+            </value>
+            <value>
+                <fullName>ValidationRule</fullName>
+                <default>false</default>
+                <label>✔️ Validation Rule</label>
+            </value>
+            <value>
+                <fullName>LightningExperienceTheme</fullName>
+                <default>false</default>
+                <label>✨ Lightning Experience Theme</label>
+            </value>
+            <value>
+                <fullName>CustomHelpMenuSection</fullName>
+                <default>false</default>
+                <label>❓ Custom Help Menu Section</label>
+            </value>
+            <value>
+                <fullName>Extension</fullName>
+                <default>false</default>
+                <label>➕ Extension</label>
+            </value>
+            <value>
+                <fullName>GlobalValueSet</fullName>
+                <default>false</default>
+                <label>🌍 Global Value Set</label>
+            </value>
+            <value>
+                <fullName>SiteDotCom</fullName>
+                <default>false</default>
+                <label>🌍 Site.com</label>
+            </value>
+            <value>
+                <fullName>RedirectWhitelistUrl</fullName>
+                <default>false</default>
+                <label>🌐 Allow URL for Redirects</label>
+            </value>
+            <value>
+                <fullName>Network</fullName>
+                <default>false</default>
+                <label>🌐 Network</label>
+            </value>
+            <value>
+                <fullName>AuraDefinitionBundle</fullName>
+                <default>false</default>
+                <label>🌟 Aura Component Bundle</label>
+            </value>
+            <value>
+                <fullName>CommunityTemplateDefinition</fullName>
+                <default>false</default>
+                <label>🌩️ Lightning Community Template</label>
+            </value>
+            <value>
+                <fullName>FlexiPage</fullName>
+                <default>false</default>
+                <label>🌩️ Lightning Page</label>
+            </value>
+            <value>
+                <fullName>DigitalExperienceBundle</fullName>
+                <default>false</default>
+                <label>🎁 Digital Experience Bundle</label>
+            </value>
+            <value>
+                <fullName>Scontrol</fullName>
+                <default>false</default>
+                <label>🎛️ S-Control</label>
+            </value>
+            <value>
+                <fullName>CommunityThemeDefinition</fullName>
+                <default>false</default>
+                <label>🎨 Lightning Community Theme</label>
+            </value>
+            <value>
+                <fullName>ApexComponent</fullName>
+                <default>false</default>
+                <label>🎨 Visualforce Component</label>
+            </value>
+            <value>
+                <fullName>Role</fullName>
+                <default>false</default>
+                <label>🎭 Role</label>
+            </value>
+            <value>
+                <fullName>EnablementMeasure</fullName>
+                <default>false</default>
+                <label>🎯 Enablement Measures</label>
+            </value>
+            <value>
+                <fullName>RecommendationStrategy</fullName>
+                <default>false</default>
+                <label>🎯 Recommendation Strategy</label>
+            </value>
+            <value>
+                <fullName>HomePageComponent</fullName>
+                <default>false</default>
+                <label>🏠 Home Page Component</label>
+            </value>
+            <value>
+                <fullName>CustomLabel</fullName>
+                <default>false</default>
+                <label>🏷️ Custom Label</label>
+            </value>
+            <value>
+                <fullName>PlatformEventChannelMember</fullName>
+                <default>false</default>
+                <label>👤 Platform Event Channel Member</label>
+            </value>
+            <value>
+                <fullName>SharingOwnerRule</fullName>
+                <default>false</default>
+                <label>👤 Sharing Owner Rule</label>
+            </value>
+            <value>
+                <fullName>UserProvisioningConfig</fullName>
+                <default>false</default>
+                <label>👤 User Provisioning Config</label>
+            </value>
+            <value>
+                <fullName>Group</fullName>
+                <default>false</default>
+                <label>👥 Group</label>
+            </value>
+            <value>
+                <fullName>ApexSharingReason</fullName>
+                <default>false</default>
+                <label>👫 Apex Sharing Reason</label>
+            </value>
+            <value>
+                <fullName>ApexClass</fullName>
+                <default>false</default>
+                <label>🧾 Apex Class</label>
+            </value>
+            <value>
+                <fullName>AssistantRecommendationType</fullName>
+                <default>false</default>
+                <label>💡 Assistant Recommendation Type</label>
+            </value>
+            <value>
+                <fullName>ChatterExtension</fullName>
+                <default>false</default>
+                <label>💬 Chatter Extension</label>
+            </value>
+            <value>
+                <fullName>Prompt</fullName>
+                <default>false</default>
+                <label>💭 Prompt</label>
+            </value>
+            <value>
+                <fullName>LightningComponentBundle</fullName>
+                <default>false</default>
+                <label>💻 Lightning Web Component Bundle</label>
+            </value>
+            <value>
+                <fullName>Folder</fullName>
+                <default>false</default>
+                <label>📁 Folder</label>
+            </value>
+            <value>
+                <fullName>ApexPage</fullName>
+                <default>false</default>
+                <label>📃 Visualforce Page</label>
+            </value>
+            <value>
+                <fullName>Document</fullName>
+                <default>false</default>
+                <label>📄 Document</label>
+            </value>
+            <value>
+                <fullName>RecordType</fullName>
+                <default>false</default>
+                <label>📇 Record Type</label>
+            </value>
+            <value>
+                <fullName>WaveDashboard</fullName>
+                <default>false</default>
+                <label>📈 Analytics Dashboard</label>
+            </value>
+            <value>
+                <fullName>WaveApplication</fullName>
+                <default>false</default>
+                <label>📊 Analytics Application</label>
+            </value>
+            <value>
+                <fullName>ReportType</fullName>
+                <default>false</default>
+                <label>📊 Custom Report Type</label>
+            </value>
+            <value>
+                <fullName>Dashboard</fullName>
+                <default>false</default>
+                <label>📊 Dashboard</label>
+            </value>
+            <value>
+                <fullName>Report</fullName>
+                <default>false</default>
+                <label>📊 Report</label>
+            </value>
+            <value>
+                <fullName>WaveTemplateBundle</fullName>
+                <default>false</default>
+                <label>📋 Analytics Template</label>
+            </value>
+            <value>
+                <fullName>ListView</fullName>
+                <default>false</default>
+                <label>📋 List View</label>
+            </value>
+            <value>
+                <fullName>WorkflowRule</fullName>
+                <default>false</default>
+                <label>📋 Workflow Rule</label>
+            </value>
+            <value>
+                <fullName>AssignmentRule</fullName>
+                <default>false</default>
+                <label>📌 Assignment Rule</label>
+            </value>
+            <value>
+                <fullName>WorkflowTask</fullName>
+                <default>false</default>
+                <label>📌 Workflow Task</label>
+            </value>
+            <value>
+                <fullName>Territory</fullName>
+                <default>false</default>
+                <label>📍 Zone</label>
+            </value>
+            <value>
+                <fullName>SharingCriteriaRule</fullName>
+                <default>false</default>
+                <label>📎 Sharing Criteria Rule</label>
+            </value>
+            <value>
+                <fullName>CompactLayout</fullName>
+                <default>false</default>
+                <label>📐 Compact Layout</label>
+            </value>
+            <value>
+                <fullName>Layout</fullName>
+                <default>false</default>
+                <label>📑 Page Layout</label>
+            </value>
+            <value>
+                <fullName>EnablementProgramDefinition</fullName>
+                <default>false</default>
+                <label>📚 Enablement Programs</label>
+            </value>
+            <value>
+                <fullName>ManagedContentType</fullName>
+                <default>false</default>
+                <label>📚 Managed Content Type</label>
+            </value>
+            <value>
+                <fullName>TransactionSecurityPolicy</fullName>
+                <default>false</default>
+                <label>📜 Transaction Security Policy</label>
+            </value>
+            <value>
+                <fullName>Letterhead</fullName>
+                <default>false</default>
+                <label>📝 Classic Letterhead</label>
+            </value>
+            <value>
+                <fullName>ExternalServiceRegistration</fullName>
+                <default>false</default>
+                <label>📝 External Service Registration</label>
+            </value>
+            <value>
+                <fullName>WorkflowFieldUpdate</fullName>
+                <default>false</default>
+                <label>📝 Workflow Field Update</label>
+            </value>
+            <value>
+                <fullName>ChannelLayout</fullName>
+                <default>false</default>
+                <label>📞 Communication Channel Layout</label>
+            </value>
+            <value>
+                <fullName>ExternalDataSource</fullName>
+                <default>false</default>
+                <label>📡 Data Service</label>
+            </value>
+            <value>
+                <fullName>LightningMessageChannel</fullName>
+                <default>false</default>
+                <label>📡 Lightning Message Channel</label>
+            </value>
+            <value>
+                <fullName>PlatformEventChannel</fullName>
+                <default>false</default>
+                <label>📡 Platform Event Channel</label>
+            </value>
+            <value>
+                <fullName>CampaignInfluenceModel</fullName>
+                <default>false</default>
+                <label>📣 Campaign Influence Model</label>
+            </value>
+            <value>
+                <fullName>OutboundNetworkConnection</fullName>
+                <default>false</default>
+                <label>📤 Outbound Network Connection</label>
+            </value>
+            <value>
+                <fullName>WorkflowOutboundMessage</fullName>
+                <default>false</default>
+                <label>📤 Workflow Outbound Message</label>
+            </value>
+            <value>
+                <fullName>RecordActionDeployment</fullName>
+                <default>false</default>
+                <label>📦 RecordAction Deployment</label>
+            </value>
+            <value>
+                <fullName>EmailService</fullName>
+                <default>false</default>
+                <label>📧 Email Service</label>
+            </value>
+            <value>
+                <fullName>WorkflowAlert</fullName>
+                <default>false</default>
+                <label>📧 Workflow Email Alert</label>
+            </value>
+            <value>
+                <fullName>EmailTemplate</fullName>
+                <default>false</default>
+                <label>📨 Email Template</label>
+            </value>
+            <value>
+                <fullName>PostTemplate</fullName>
+                <default>false</default>
+                <label>📬 Post Template</label>
+            </value>
+            <value>
+                <fullName>CustomApplication</fullName>
+                <default>false</default>
+                <label>📱 App</label>
+            </value>
+            <value>
+                <fullName>ReportingSnapshot</fullName>
+                <default>false</default>
+                <label>📸 Reporting Snapshot</label>
+            </value>
+            <value>
+                <fullName>ChannelMenuDeployment</fullName>
+                <default>false</default>
+                <label>📺 Channel Menu Deployment</label>
+            </value>
+            <value>
+                <fullName>EventRelayConfig</fullName>
+                <default>false</default>
+                <label>🔁 Event Relay Configuration</label>
+            </value>
+            <value>
+                <fullName>ProcessMigration</fullName>
+                <default>false</default>
+                <label>🔁 Process Flow Migration</label>
+            </value>
+            <value>
+                <fullName>WaveDataflow</fullName>
+                <default>false</default>
+                <label>🔄 Analytics Dataflow</label>
+            </value>
+            <value>
+                <fullName>FlowDefinition</fullName>
+                <default>false</default>
+                <label>🔄 Flow Definition</label>
+            </value>
+            <value>
+                <fullName>InboundNetworkConnection</fullName>
+                <default>false</default>
+                <label>🔌 Inbound Network Connection</label>
+            </value>
+            <value>
+                <fullName>WaveLens</fullName>
+                <default>false</default>
+                <label>🔍 Analytics Lens</label>
+            </value>
+            <value>
+                <fullName>AuthProvider</fullName>
+                <default>false</default>
+                <label>🔐 Auth. Provider</label>
+            </value>
+            <value>
+                <fullName>PermissionSet</fullName>
+                <default>false</default>
+                <label>🔐 Permission Set</label>
+            </value>
+            <value>
+                <fullName>CustomPermission</fullName>
+                <default>false</default>
+                <label>🔑 Custom Permission</label>
+            </value>
+            <value>
+                <fullName>CustomNotificationType</fullName>
+                <default>false</default>
+                <label>🔔 Custom Notification Type</label>
+            </value>
+            <value>
+                <fullName>PlatformEventSubscriberConfig</fullName>
+                <default>false</default>
+                <label>🔔 Platform Event Subscriber Configuration</label>
+            </value>
+            <value>
+                <fullName>ActionLinkGroupTemplate</fullName>
+                <default>false</default>
+                <label>🔗 Action Link Group Template</label>
+            </value>
+            <value>
+                <fullName>WebLink</fullName>
+                <default>false</default>
+                <label>🔘 Button or Link</label>
+            </value>
+            <value>
+                <fullName>CustomIndex</fullName>
+                <default>false</default>
+                <label>🔢 Custom Index</label>
+            </value>
+            <value>
+                <fullName>EscalationRule</fullName>
+                <default>false</default>
+                <label>🔺 Escalation Rule</label>
+            </value>
+            <value>
+                <fullName>ScopingRule</fullName>
+                <default>false</default>
+                <label>🕵️‍♂️ Scoping Rule</label>
+            </value>
+            <value>
+                <fullName>ContentAsset</fullName>
+                <default>false</default>
+                <label>🖼️ Asset File</label>
+            </value>
+            <value>
+                <fullName>HomePageLayout</fullName>
+                <default>false</default>
+                <label>🖼️ Home Page Layout</label>
+            </value>
+            <value>
+                <fullName>WaveXmd</fullName>
+                <default>false</default>
+                <label>🗂️ Analytics Dataset Metadata</label>
+            </value>
+            <value>
+                <fullName>StaticResource</fullName>
+                <default>false</default>
+                <label>🗂️ Static Resource</label>
+            </value>
+            <value>
+                <fullName>CustomTab</fullName>
+                <default>false</default>
+                <label>🗂️ Tab</label>
+            </value>
+            <value>
+                <fullName>WaveDataset</fullName>
+                <default>false</default>
+                <label>🗃️ Analytics Dataset</label>
+            </value>
+            <value>
+                <fullName>EclairNGMapGeoJson</fullName>
+                <default>false</default>
+                <label>🗺️ EclairNG Map GeoJson</label>
+            </value>
+            <value>
+                <fullName>FieldMapping</fullName>
+                <default>false</default>
+                <label>🗺️ Field Mapping</label>
+            </value>
+            <value>
+                <fullName>RemoteSiteSetting</fullName>
+                <default>false</default>
+                <label>🗺️ Remote Site</label>
+            </value>
+            <value>
+                <fullName>CorsWhitelistOrigin</fullName>
+                <default>false</default>
+                <label>🚧 CORS Whitelist Origin</label>
+            </value>
+            <value>
+                <fullName>RestrictionRule</fullName>
+                <default>false</default>
+                <label>🚫 Restriction Rule</label>
+            </value>
+            <value>
+                <fullName>ExternalCredential</fullName>
+                <default>false</default>
+                <label>🛂 External Credential</label>
+            </value>
+            <value>
+                <fullName>EventSubscription</fullName>
+                <default>false</default>
+                <label>🛎️ Event Subscription</label>
+            </value>
+            <value>
+                <fullName>CspTrustedSite</fullName>
+                <default>false</default>
+                <label>🛡️ Content Security Policy Trusted Site</label>
+            </value>
+            <value>
+                <fullName>PermissionSetGroup</fullName>
+                <default>false</default>
+                <label>🛡️ Permission Set Group</label>
+            </value>
+            <value>
+                <fullName>SecurityBaseline</fullName>
+                <default>false</default>
+                <label>🛡️ Security Custom Baseline</label>
+            </value>
+            <value>
+                <fullName>PathAssistant</fullName>
+                <default>false</default>
+                <label>🛤️ Path Assistant</label>
+            </value>
+            <value>
+                <fullName>AutoResponseRule</fullName>
+                <default>false</default>
+                <label>🤖 Auto-Response Rule</label>
+            </value>
+            <value>
+                <fullName>Bot</fullName>
+                <default>false</default>
+                <label>🤖 Bot</label>
+            </value>
+            <value>
+                <fullName>PlatformCachePartition</fullName>
+                <default>false</default>
+                <label>🧊 Platform Cache Partition</label>
+            </value>
+            <value>
+                <fullName>DuplicateRule</fullName>
+                <default>false</default>
+                <label>🧍‍♂️🧍‍♂️ Duplicate Rule</label>
+            </value>
+            <value>
+                <fullName>GenerativeAIPromptTemplate</fullName>
+                <default>false</default>
+                <label>🧠 Gen AI Prompt Template</label>
+            </value>
+            <value>
+                <fullName>CustomField</fullName>
+                <default>false</default>
+                <label>🧩 Custom Field</label>
+            </value>
+            <value>
+                <fullName>EntityImplements</fullName>
+                <default>false</default>
+                <label>🧩 Entity Implements</label>
+            </value>
+            <value>
+                <fullName>MatchingRule</fullName>
+                <default>false</default>
+                <label>🟰 Matching Rule</label>
+            </value>
+            <value>
+                <fullName>WaveRecipe</fullName>
+                <default>false</default>
+                <label>🧪 Analytics Recipe</label>
+            </value>
+            <value>
+                <fullName>FlowTest</fullName>
+                <default>false</default>
+                <label>🧪 Flow Test</label>
+            </value>
+            <value>
+                <fullName>CustomDataType</fullName>
+                <default>false</default>
+                <label>🧬 Custom Data Type</label>
+            </value>
+            <value>
+                <fullName>DigitalExperience</fullName>
+                <default>false</default>
+                <label>🧭 Digital Experience</label>
+            </value>
+            <value>
+                <fullName>CustomObject</fullName>
+                <default>false</default>
+                <label>🧱 Custom Object</label>
+            </value>
+            <value>
+                <fullName>ExperiencePropertyTypeBundle</fullName>
+                <default>false</default>
+                <label>🧱 Experience Property Type Bundle</label>
+            </value>
+            <value>
+                <fullName>EmbeddedServiceConfig</fullName>
+                <default>false</default>
+                <label>🧵 Embedded Service Deployment</label>
+            </value>
+            <value>
+                <fullName>FieldSet</fullName>
+                <default>false</default>
+                <label>🧷 Field Set</label>
+            </value>
+            <value>
+                <fullName>Queue</fullName>
+                <default>false</default>
+                <label>🧺 Queue</label>
+            </value>
+            <value>
+                <fullName>CustomMetadata</fullName>
+                <default>false</default>
+                <label>🧾 Custom Metadata</label>
+            </value>
+            <value>
+                <fullName>NamedCredential</fullName>
+                <default>false</default>
+                <label>🧾 Named Credential</label>
+            </value>
+            <value>
+                <fullName>OauthWebAppDomain</fullName>
+                <default>false</default>
+                <label>🪟 Microsoft® Outlook® Web App Domain</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

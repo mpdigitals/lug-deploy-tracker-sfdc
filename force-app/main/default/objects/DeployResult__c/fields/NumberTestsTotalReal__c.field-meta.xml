@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NumberTestsTotalReal__c</fullName>
+    <description>Number of non-duplicate tests</description>
+    <label>Tests Total (No duplicates)</label>
+    <summaryForeignKey>DeployResultTest__c.DeployResult__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

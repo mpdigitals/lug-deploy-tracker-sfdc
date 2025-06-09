@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <description>The overall status of the deployment request (e.g., Succeeded, Failed).</description>
+    <label>Status</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Canceled</fullName>
+                <default>false</default>
+                <label>⛔ Canceled</label>
+            </value>
+            <value>
+                <fullName>Failed</fullName>
+                <default>false</default>
+                <label>❌ Failed</label>
+            </value>
+            <value>
+                <fullName>Succeeded</fullName>
+                <default>false</default>
+                <label>✅ Succeeded</label>
+            </value>
+            <value>
+                <fullName>Pending</fullName>
+                <default>false</default>
+                <label>⏳ Pending</label>
+            </value>
+            <value>
+                <fullName>InProgress</fullName>
+                <default>false</default>
+                <label>🔄 In Progress</label>
+            </value>
+            <value>
+                <fullName>SucceededPartial</fullName>
+                <default>false</default>
+                <label>🟡 Succeeded Partial</label>
+            </value>
+            <value>
+                <fullName>Canceling</fullName>
+                <default>false</default>
+                <label>⚠️ Canceling</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

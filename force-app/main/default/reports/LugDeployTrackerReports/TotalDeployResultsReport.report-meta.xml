@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>DeployResultComponent__c.Success__c:SUM</calculatedFormula>
+        <datatype>number</datatype>
+        <description>Total Erros</description>
+        <developerName>FORMULA1</developerName>
+        <isActive>false</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Total Errors</masterLabel>
+        <scale>2</scale>
+    </aggregates>
+    <aggregates>
+        <calculatedFormula>DeployResult__c.CompletedDate__c:UNIQUE - DeployResult__c.StartDate__c:UNIQUE</calculatedFormula>
+        <datatype>number</datatype>
+        <description>Total time</description>
+        <developerName>FORMULA2</developerName>
+        <isActive>false</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Total time</masterLabel>
+        <scale>2</scale>
+    </aggregates>
+    <aggregates>
+        <calculatedFormula>DeployResult__c.CompletedDate__c:UNIQUE - DeployResult__c.StartDate__c:UNIQUE</calculatedFormula>
+        <datatype>number</datatype>
+        <description>Deploy AVG time</description>
+        <developerName>FORMULA3</developerName>
+        <isActive>false</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Deploy AVG time</masterLabel>
+        <scale>2</scale>
+    </aggregates>
+    <chart>
+        <backgroundColor1>#FFFFFF</backgroundColor1>
+        <backgroundColor2>#FFFFFF</backgroundColor2>
+        <backgroundFadeDir>Diagonal</backgroundFadeDir>
+        <chartSummaries>
+            <axisBinding>y</axisBinding>
+            <column>RowCount</column>
+        </chartSummaries>
+        <chartType>VerticalColumnStacked</chartType>
+        <enableHoverLabels>false</enableHoverLabels>
+        <expandOthers>true</expandOthers>
+        <groupingColumn>DeployResult__c$CompletedDate__c</groupingColumn>
+        <legendPosition>Right</legendPosition>
+        <location>CHART_BOTTOM</location>
+        <secondaryGroupingColumn>DeployResult__c$Status__c</secondaryGroupingColumn>
+        <showAxisLabels>true</showAxisLabels>
+        <showPercentage>false</showPercentage>
+        <showTotal>false</showTotal>
+        <showValues>false</showValues>
+        <size>Medium</size>
+        <summaryAxisRange>Auto</summaryAxisRange>
+        <textColor>#000000</textColor>
+        <textSize>12</textSize>
+        <titleColor>#000000</titleColor>
+        <titleSize>18</titleSize>
+    </chart>
+    <columns>
+        <aggregateTypes>Average</aggregateTypes>
+        <field>CDF1</field>
+    </columns>
+    <columns>
+        <field>DeployResult__c$Name</field>
+    </columns>
+    <columns>
+        <field>DeployResult__c$ExecutionTime__c</field>
+    </columns>
+    <columns>
+        <field>DeployResult__c$CheckOnly__c</field>
+    </columns>
+    <columns>
+        <field>DeployResult__c$Done__c</field>
+    </columns>
+    <columns>
+        <field>DeployResult__c$CreatedByName__c</field>
+    </columns>
+    <columns>
+        <field>DeployResult__c$Type__c</field>
+    </columns>
+    <columns>
+        <field>DeployResult__c$ErrorMessage__c</field>
+    </columns>
+    <columns>
+        <field>DeployResult__c$ErrorStatusCode__c</field>
+    </columns>
+    <columns>
+        <field>DeployResult__c$IgnoreWarnings__c</field>
+    </columns>
+    <columns>
+        <field>DeployResult__c$NumberTestErrors__c</field>
+    </columns>
+    <columns>
+        <field>DeployResult__c$NumberTestsCompleted__c</field>
+    </columns>
+    <columns>
+        <field>DeployResult__c$NumberTestsTotal__c</field>
+    </columns>
+    <columns>
+        <field>DeployResult__c$RollbackOnError__c</field>
+    </columns>
+    <columns>
+        <field>DeployResult__c$RunTestsEnabled__c</field>
+    </columns>
+    <columns>
+        <field>DeployResult__c$StartDate__c</field>
+    </columns>
+    <columns>
+        <field>DeployResult__c$StateDetail__c</field>
+    </columns>
+    <customDetailFormulas>
+        <calculatedFormula>(DeployResult__c.CompletedDate__c - DeployResult__c.StartDate__c) * 86400</calculatedFormula>
+        <dataType>Double</dataType>
+        <description>Deploy AVG Time</description>
+        <developerName>CDF1</developerName>
+        <label>Deploy AVG Time</label>
+        <scale>0</scale>
+    </customDetailFormulas>
+    <description>Deploy Results Report</description>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>DeployResult__c$Status__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <field>DeployResult__c$CompletedDate__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Deploy Result Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>DeployResultComponents__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>DeployResult__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

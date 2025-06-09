@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DeploymentCompactLayout</fullName>
+    <fields>Name</fields>
+    <fields>Result__c</fields>
+    <fields>StartDate__c</fields>
+    <fields>ExecutionTime__c</fields>
+    <fields>NumberComponentsTotal__c</fields>
+    <fields>NumberComponentErrors__c</fields>
+    <fields>NumberTestErrors__c</fields>
+    <label>Deployment Compact Layout</label>
+</CompactLayout>

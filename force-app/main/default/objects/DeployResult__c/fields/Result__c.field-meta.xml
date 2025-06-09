@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Result__c</fullName>
+    <description>Result</description>
+    <externalId>false</externalId>
+    <formula>CASE(
+    TEXT(Status__c),
+    &quot;Succeeded&quot;, IMAGE(&quot;/resource/deployResources/images/succeeded.png&quot;, &quot;Succeeded&quot;, 28, 109),
+    &quot;Failed&quot;, IMAGE(&quot;/resource/deployResources/images/failed.png&quot;, &quot;Failed&quot;, 28, 109),
+    &quot;Canceled&quot;, IMAGE(&quot;/resource/deployResources/images/canceled.png&quot;, &quot;Canceled&quot;, 28, 109),
+    &quot;Pending&quot;, IMAGE(&quot;/resource/deployResources/images/queued.png&quot;, &quot;Queued&quot;,28, 109),
+    &quot;InProgress&quot;, IMAGE(&quot;/resource/deployResources/images/inprogress.png&quot;, &quot;In Progress&quot;, 28, 109),
+    &quot;SucceededPartial&quot;, IMAGE(&quot;/resource/deployResources/images/succeededpartial.png&quot;, &quot;Succeeded Partial&quot;, 28, 109),
+    &quot;Canceling&quot;, IMAGE(&quot;/resource/deployResources/images/canceling.png&quot;, &quot;Canceling&quot;, 28, 109),
+    &quot;&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Result</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

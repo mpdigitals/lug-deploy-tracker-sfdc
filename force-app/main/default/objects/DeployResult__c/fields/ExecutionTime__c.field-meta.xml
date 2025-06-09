@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ExecutionTime__c</fullName>
+    <description>Deployment Duration</description>
+    <externalId>false</externalId>
+    <formula>IF(
+  AND(
+    NOT(ISBLANK(CompletedDate__c)),
+    NOT(ISBLANK(StartDate__c))
+  ),
+  TEXT(FLOOR((CompletedDate__c - StartDate__c) * 24)) &amp; &quot;:&quot; &amp;
+  LPAD(TEXT(FLOOR(MOD((CompletedDate__c - StartDate__c) * 1440, 60))), 2, &quot;0&quot;) &amp; &quot;:&quot; &amp;
+  LPAD(TEXT(FLOOR(MOD((CompletedDate__c - StartDate__c) * 86400, 60))), 2, &quot;0&quot;),
+  &quot;&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Execution Time</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

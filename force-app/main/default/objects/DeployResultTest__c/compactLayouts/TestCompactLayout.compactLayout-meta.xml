@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TestCompactLayout</fullName>
+    <fields>Name__c</fields>
+    <fields>ResultDisplay__c</fields>
+    <fields>MethodName__c</fields>
+    <fields>ExecutionTime__c</fields>
+    <label>Test Compact Layout</label>
+</CompactLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DeployFailed</fullName>
+    <columns>NAME</columns>
+    <columns>ResultDisplay__c</columns>
+    <columns>ComponentType__c</columns>
+    <columns>FullName__c</columns>
+    <columns>Status__c</columns>
+    <columns>DeployResult__c</columns>
+    <columns>RequiresProductionTestRun__c</columns>
+    <columns>ProblemType__c</columns>
+    <columns>Problem__c</columns>
+    <columns>Linenumber__c</columns>
+    <columns>ColumnNumber__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Success__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <label>Failed</label>
+</ListView>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DeployFailed</fullName>
+    <columns>NAME</columns>
+    <columns>Status__c</columns>
+    <columns>StartDate__c</columns>
+    <columns>CompletedDate__c</columns>
+    <columns>ExecutionTime__c</columns>
+    <columns>CheckOnly__c</columns>
+    <columns>NumberComponentsTotal__c</columns>
+    <columns>NumberComponentsDeployed__c</columns>
+    <columns>NumberComponentErrors__c</columns>
+    <columns>ErrorMessage__c</columns>
+    <columns>ErrorStatusCode__c</columns>
+    <columns>CreatedByName__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Failed</value>
+    </filters>
+    <label>Failed</label>
+</ListView>

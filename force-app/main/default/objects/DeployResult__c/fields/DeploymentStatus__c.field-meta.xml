@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DeploymentStatus__c</fullName>
+    <description>See Salesforce Deployment Status</description>
+    <externalId>false</externalId>
+    <formula>HYPERLINK(
+  LEFT($Api.Partner_Server_URL_560, FIND(&quot;/services&quot;, $Api.Partner_Server_URL_560) - 1) &amp;
+  &quot;/lightning/setup/DeployStatus/page?address=/changemgmt/monitorDeploymentsDetails.apexp?asyncId=&quot; &amp;
+  SUBSTITUTE(
+    SUBSTITUTE(
+      SUBSTITUTE(Id__c, &quot;+&quot;, &quot;%2B&quot;),
+      &quot;&amp;&quot;, &quot;%26&quot;
+    ),
+    &quot;=&quot;, &quot;%3D&quot;
+  ) &amp;
+  &quot;&amp;retURL=/changemgmt/monitorDeployment.apexp&quot;,
+   Id__c ,
+  &quot;_blank&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Deployment Status</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

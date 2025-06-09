@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IgnoreWarnings__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Whether warnings should be ignored during the deployment.</description>
+    <label>Ignore Warnings</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

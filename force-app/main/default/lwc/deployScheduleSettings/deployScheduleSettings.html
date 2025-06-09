@@ -1,0 +1,80 @@
+<template>
+  <div class="slds-box slds-theme_default slds-m-around_medium">
+    <c-deploy-header
+      title={headerTitle}
+      subtitle={headerSubtitle}
+      icon-name="standard:schedule_objective"
+      alternative-text={headerAltText}
+    ></c-deploy-header>
+
+    <div class="slds-border_bottom slds-m-bottom_small">
+      <h3 class="slds-text-title_caps slds-p-vertical_x-small">
+        {sectionTitle}
+      </h3>
+    </div>  
+
+    <div class="slds-form">
+      <lightning-input
+        type="datetime"
+        label={startTimeLabel}
+        required
+        value={startTime}
+        onchange={handleStartTimeChange}
+        disabled={areFieldsDisabled}
+        placeholder={startTimePlaceholder}
+        min={minStartTime}
+      ></lightning-input>
+
+      <div class="slds-size_2-of-12">
+        <lightning-combobox
+          name="frequencyUnit"
+          label={frequencyUnitLabel}
+          required
+          value={frequencyUnit}
+          options={unitOptions}
+          onchange={handleUnitChange}
+          disabled={areFieldsDisabled}
+        ></lightning-combobox>
+      </div>
+
+      <div class="slds-size_2-of-12">
+        <lightning-input
+          type="number" 
+          label={frequencyValueLabel}
+          value={frequencyValue}
+          required
+          min={minValue}
+          max={maxValue}
+          placeholder={frequencyValuePlaceholder}
+          onchange={handleValueChange}
+          disabled={isValueInputDisabled}
+        ></lightning-input>
+      </div>
+
+      <lightning-input
+        type="checkbox"
+        label={enabledScheduleLabel}
+        checked={isEnabled}
+        onchange={handleEnabledChange}
+      ></lightning-input>
+
+      <div class="slds-m-top_medium">
+        <lightning-button
+          variant="brand"
+          label={saveButtonLabel}
+          onclick={handleSave}
+          disabled={isSaveDisabled}
+        ></lightning-button>
+
+        <template if:true={isLoading}>
+          <div class="slds-m-top_medium slds-align_absolute-center">
+            <lightning-spinner
+              size="medium"
+              alternative-text={spinnerAltText}
+            ></lightning-spinner>
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
+</template>

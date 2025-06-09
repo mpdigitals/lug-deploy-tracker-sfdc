@@ -1,0 +1,18 @@
+{
+  "records": [
+    {
+      "Id": "0AfQy00000Kf1XhKAJ",
+      "Status": "Failed",
+      "CompletedDate": "2025-05-11T16:51:47.000+0000",
+      "CheckOnly": false,
+      "IgnoreWarnings": false,
+      "RollbackOnError": true,
+      "RunTestsEnabled": true,
+      "AllowMissingFiles": false,
+      "AutoUpdatePackage": false,
+      "PurgeOnDelete": false,
+      "SinglePackage": true,
+      "TestLevel": "RunLocalTests"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+<template>
+  <template if:true={hasAccess}>
+    <div class="slds-box slds-theme_default container">
+      <lightning-layout multiple-rows class="slds-var-p-around_medium">
+
+        <lightning-layout-item
+          size="12"
+          large-device-size="3"
+          padding="around-small"
+        >
+          <lightning-vertical-navigation
+            selected-item={selectedItem}
+            onselect={handleSelect}
+          >
+            <lightning-vertical-navigation-section label={navSectionLabel}>
+              <lightning-vertical-navigation-item-icon
+                label={syncLabel}
+                name="sync"
+                icon-name="standard:data_transforms"
+                icon-size="large"
+              ></lightning-vertical-navigation-item-icon>
+
+              <lightning-vertical-navigation-item-icon
+                label={scheduleLabel}
+                name="schedule"
+                icon-name="standard:schedule_objective"
+                icon-size="large"
+              ></lightning-vertical-navigation-item-icon>
+
+              <lightning-vertical-navigation-item-icon
+                label={advancedLabel}
+                name="advanced"
+                icon-name="standard:custom"
+                icon-size="large"
+              ></lightning-vertical-navigation-item-icon>
+            </lightning-vertical-navigation-section>
+          </lightning-vertical-navigation>
+        </lightning-layout-item>
+
+        <lightning-layout-item
+          size="12"
+          large-device-size="9"
+          padding="around-medium"
+        >
+          <template if:true={isSyncView}>
+            <c-deploy-sync-settings></c-deploy-sync-settings>
+          </template>
+
+          <template if:true={isScheduleView}>
+            <c-deploy-schedule-settings></c-deploy-schedule-settings>
+          </template>
+
+          <template if:true={isAdvancedView}>
+            <c-deploy-advanced-settings></c-deploy-advanced-settings>
+          </template>
+        </lightning-layout-item>
+
+      </lightning-layout>
+    </div>
+  </template>
+  
+  <template if:true={accessChecked}>
+    <template if:false={hasAccess}>
+      <section class="slds-card slds-size_1-of-1 slds-m-vertical_medium slds-p-around_large slds-text-align_center">
+        <div class="slds-media slds-media_center">
+          <div class="slds-media__figure">
+            <lightning-icon
+              icon-name="utility:lock"
+              alternative-text={accessDeniedTitle}
+              title={accessDeniedTitle}
+              variant="error"
+              size="large">
+            </lightning-icon>
+          </div>
+          <div class="slds-media__body">
+            <h2 class="slds-text-heading_medium slds-m-bottom_small">
+              {accessDeniedTitle}
+            </h2>
+            <p class="slds-text-body_regular">
+              {accessDeniedMessage}
+            </p>
+          </div>
+        </div>
+      </section>
+    </template>
+  </template>
+</template>

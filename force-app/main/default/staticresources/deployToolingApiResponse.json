@@ -1,0 +1,231 @@
+{
+  "id": "0AfQy00000Kf1XhKAJ",
+  "validatedDeployRequestId": null,
+  "deployOptions": null,
+  "deployResult": {
+    "id": "0AfQy00000Kf1XhKAJ",
+    "messages": null,
+    "retrieveResult": null,
+    "success": false,
+    "checkOnly": false,
+    "ignoreWarnings": false,
+    "rollbackOnError": true,
+    "status": "Failed",
+    "numberComponentsDeployed": 2,
+    "numberComponentsTotal": 2,
+    "numberComponentErrors": 0,
+    "numberTestsCompleted": 1,
+    "numberTestsTotal": 3,
+    "numberTestErrors": 2,
+    "details": {
+      "componentFailures": [],
+      "componentSuccesses": [
+        {
+          "componentType": "ApexClass",
+          "fileName": "classes/MyServiceClass.cls",
+          "fullName": "MyServiceClass",
+          "id": "01pQy00000E5Yx3IAF",
+          "problem": null,
+          "success": true,
+          "warning": false,
+          "created": false,
+          "changed": false,
+          "deleted": false,
+          "lineNumber": null,
+          "columnNumber": null,
+          "requiresProductionTestRun": false,
+          "createdDate": "2025-05-11T16:51:36.000+0000",
+          "problemType": null,
+          "knownPackagingProblem": false,
+          "forPackageManifestFile": false
+        },
+        {
+          "componentType": "ApexClass",
+          "fileName": "classes/MyServiceClassTest.cls",
+          "fullName": "MyServiceClassTest",
+          "id": "01pQy00000EenIzIAJ",
+          "problem": null,
+          "success": true,
+          "warning": false,
+          "created": false,
+          "changed": true,
+          "deleted": false,
+          "lineNumber": null,
+          "columnNumber": null,
+          "requiresProductionTestRun": false,
+          "createdDate": "2025-05-11T16:51:36.000+0000",
+          "problemType": null,
+          "knownPackagingProblem": false,
+          "forPackageManifestFile": false
+        },
+        {
+          "componentType": "",
+          "fileName": "package.xml",
+          "fullName": "package.xml",
+          "id": null,
+          "problem": null,
+          "success": true,
+          "warning": false,
+          "created": false,
+          "changed": true,
+          "deleted": false,
+          "lineNumber": null,
+          "columnNumber": null,
+          "requiresProductionTestRun": false,
+          "createdDate": "2025-05-11T16:51:36.000+0000",
+          "problemType": null,
+          "knownPackagingProblem": false,
+          "forPackageManifestFile": true
+        }
+      ],
+      "retrieveResult": null,
+      "allComponentMessages": [
+        {
+          "componentType": "ApexClass",
+          "fileName": "classes/MyServiceClass.cls",
+          "fullName": "MyServiceClass",
+          "id": "01pQy00000E5Yx3IAF",
+          "problem": null,
+          "success": true,
+          "warning": false,
+          "created": false,
+          "changed": false,
+          "deleted": false,
+          "lineNumber": null,
+          "columnNumber": null,
+          "requiresProductionTestRun": false,
+          "createdDate": "2025-05-11T16:51:36.000+0000",
+          "problemType": null,
+          "knownPackagingProblem": false,
+          "forPackageManifestFile": false
+        },
+        {
+          "componentType": "ApexClass",
+          "fileName": "classes/MyServiceClassTest.cls",
+          "fullName": "MyServiceClassTest",
+          "id": "01pQy00000EenIzIAJ",
+          "problem": null,
+          "success": true,
+          "warning": false,
+          "created": false,
+          "changed": true,
+          "deleted": false,
+          "lineNumber": null,
+          "columnNumber": null,
+          "requiresProductionTestRun": false,
+          "createdDate": "2025-05-11T16:51:36.000+0000",
+          "problemType": null,
+          "knownPackagingProblem": false,
+          "forPackageManifestFile": false
+        },
+        {
+          "componentType": "",
+          "fileName": "package.xml",
+          "fullName": "package.xml",
+          "id": null,
+          "problem": null,
+          "success": true,
+          "warning": false,
+          "created": false,
+          "changed": true,
+          "deleted": false,
+          "lineNumber": null,
+          "columnNumber": null,
+          "requiresProductionTestRun": false,
+          "createdDate": "2025-05-11T16:51:36.000+0000",
+          "problemType": null,
+          "knownPackagingProblem": false,
+          "forPackageManifestFile": true
+        }
+      ],
+      "runTestResult": {
+        "successes": [
+          {
+            "namespace": null,
+            "name": "MyServiceClassTest",
+            "methodName": "testBasicExecution",
+            "id": "01pQy00000EenIzIAJ",
+            "time": 290,
+            "seeAllData": null
+          }
+        ],
+        "failures": [
+          {
+            "type": "Class",
+            "namespace": null,
+            "name": "MyServiceClassTest",
+            "methodName": "testExecution_withDates",
+            "message": "System.AuraHandledException: Script-thrown exception",
+            "stackTrace": "Class.MyServiceClass.syncDeployments: line 45, column 1\nClass.MyServiceClassTest.testExecution_withDates: line 10, column 1",
+            "id": "01pQy00000EenIzIAJ",
+            "seeAllData": null,
+            "time": 68,
+            "packageName": "MyServiceClassTest"
+          },
+          {
+            "type": "Class",
+            "namespace": null,
+            "name": "MyServiceClassTest",
+            "methodName": "testExecution_withStartOnly",
+            "message": "System.AuraHandledException: Script-thrown exception",
+            "stackTrace": "Class.MyServiceClass.syncDeployments: line 45, column 1\nClass.MyServiceClassTest.testExecution_withStartOnly: line 20, column 1",
+            "id": "01pQy00000EenIzIAJ",
+            "seeAllData": null,
+            "time": 65,
+            "packageName": "MyServiceClassTest"
+          }
+        ],
+        "totalTime": 455,
+        "apexLogId": null,
+        "codeCoverageWarnings": [
+    	    {
+             "id": "01pQy00000Fake01",
+             "name": "MyServiceClass",
+             "namespace": null,
+             "message": "Test coverage of selected Apex Class is 64.29%, at least 75% required"
+            }
+        ],
+        "numFailures": 2,
+        "flowCoverage": [],
+        "codeCoverage": [
+          {
+            "soslInfo": [],
+            "dmlInfo": [],
+            "numLocations": 24,
+            "numLocationsNotCovered": 1,
+            "soqlInfo": [],
+            "methodInfo": [],
+            "locationsNotCovered": [
+              {
+                "line": 23,
+                "numExecutions": 0,
+                "time": -1,
+                "column": 0
+              }
+            ],
+            "name": "MyServiceClass",
+            "id": "01pQy00000E5Yx3IAF",
+            "type": "Class",
+            "namespace": null
+          }
+        ],
+        "flowCoverageWarnings": [],
+        "numTestsRun": 3
+      }
+    },
+    "createdDate": "2025-05-11T16:51:35.000+0000",
+    "startDate": "2025-05-11T16:51:35.000+0000",
+    "lastModifiedDate": "2025-05-11T16:51:47.000+0000",
+    "completedDate": "2025-05-11T16:51:47.000+0000",
+    "errorStatusCode": null,
+    "errorMessage": null,
+    "stateDetail": null,
+    "createdBy": "005Qy000005SmwT",
+    "createdByName": "Julio Melon",
+    "canceledBy": null,
+    "canceledByName": null,
+    "done": true,
+    "runTestsEnabled": true,
+    "runTestResult": null
+  }
+}

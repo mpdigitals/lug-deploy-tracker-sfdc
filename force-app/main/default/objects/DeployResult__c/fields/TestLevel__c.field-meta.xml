@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TestLevel__c</fullName>
+    <description>Level of test execution: NoTestRun, RunSpecifiedTests, RunLocalTests, or RunAllTestsInOrg.</description>
+    <label>Test Level</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>NoTestRun</fullName>
+                <default>false</default>
+                <label>NoTestRun</label>
+            </value>
+            <value>
+                <fullName>RunSpecifiedTests</fullName>
+                <default>false</default>
+                <label>RunSpecifiedTests</label>
+            </value>
+            <value>
+                <fullName>RunLocalTests</fullName>
+                <default>false</default>
+                <label>RunLocalTests</label>
+            </value>
+            <value>
+                <fullName>RunAllTestsInOrg</fullName>
+                <default>false</default>
+                <label>RunAllTestsInOrg</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

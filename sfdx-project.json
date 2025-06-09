@@ -1,0 +1,20 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "package": "LugDeployTracker",
+      "versionName": "ver 0.1",
+      "versionNumber": "0.1.0.NEXT",
+      "default": true,
+      "versionDescription": "Deployment monitoring solution"
+    }
+  ],
+  "name": "Lug Deploy Tracker",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "63.0",
+  "packageAliases": {
+    "LugDeployTracker": "0HoQy0000000iYvKAI",
+    "LugDeployTracker@0.1.0-1": "04tQy0000009lirIAA"
+  }
+}
