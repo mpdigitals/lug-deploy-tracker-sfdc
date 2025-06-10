@@ -6,7 +6,7 @@
       "versionName": "ver 0.1",
       "versionNumber": "0.1.0.NEXT",
       "default": true,
-      "versionDescription": "Deployment monitoring solution"
+      "versionDescription": "Deployment tracking tool using Tooling API"
     }
   ],
   "name": "Lug Deploy Tracker",
@@ -14,7 +14,7 @@
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "63.0",
   "packageAliases": {
-    "LugDeployTracker": "0HoQy0000000iYvKAI",
-    "LugDeployTracker@0.1.0-1": "04tQy0000009lirIAA"
+    "LugDeployTracker": "0HoQy0000000iaXKAQ",
+    "LugDeployTracker@0.1.0-1": "04tQy0000009mDVIAY"
   }
 }
