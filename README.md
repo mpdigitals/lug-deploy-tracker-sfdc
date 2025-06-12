@@ -147,7 +147,7 @@ Related List of tests on a `DeployResult__c` record:
 
 ## Architecture Overview 🏗️
 
-**This Salesforce Diagrams template (deploy_schema) shows how LugDeployTracker uses asynchronous batch processing with Tooling API and Platform Events to synchronize and track DeployRequest data.** Progress events (DeployProgress__e) are published after commit and consumed in real time by a Lightning Web Component to display batch progress.
+**This Salesforce Diagrams template shows how Lug Deploy Tracker uses asynchronous batch processing with the Tooling API to synchronize and track DeployRequest data.** Progress events (DeployProgress__e) are published after commit and consumed in real time by a Lightning Web Component to display batch progress during manual synchronization.
 
 ![Architecture Diagram](media/images/deploy_schema.png)
 
@@ -210,7 +210,7 @@ Related List of tests on a `DeployResult__c` record:
 
 #### Configuration
 
-- `DeployConfiguration__c` — Hierarchical Custom Setting (used for operational state during execution and by the LWC)
+- `DeploySetup__c` — Hierarchical Custom Setting (used for operational state during execution and by the LWC)
 
 ---
 
