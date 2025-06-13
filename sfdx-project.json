@@ -15,6 +15,7 @@
   "sourceApiVersion": "63.0",
   "packageAliases": {
     "LugDeployTracker": "0HoQy0000000iaXKAQ",
-    "LugDeployTracker@0.1.0-1": "04tQy0000009mDVIAY"
+    "LugDeployTracker@0.1.0-1": "04tQy0000009mDVIAY",
+    "LugDeployTracker@0.1.0-2": "04tQy0000009q5pIAA"
   }
 }
