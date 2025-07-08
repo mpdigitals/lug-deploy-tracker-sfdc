@@ -1,21 +1,24 @@
 /**
- * @description Client for calling Salesforce Tooling API using a Named Credential.
+ * @description Client for calling Salesforce Tooling API using either Named Credential or UserInfo.getSessionId().
  * Supports SOQL queries and fetching detailed DeployRequest results.
- * @author develop@mpdigitals.com
+ * Author: develop@mpdigitals.com
  */
 public with sharing class DeployToolingClient implements DeployToolingClientInterface {
 
     private final String namedCredential;
+    private final Boolean useSessionId;
 
     /**
-     * @description Constructor that sets the Named Credential for API callouts.
+     * @description Constructor that sets the Named Credential and auth mode.
      * @param namedCredential DeveloperName of the Named Credential.
+     * @param useSessionId Whether to use UserInfo.getSessionId() instead of Named Credential.
      */
-    public DeployToolingClient(String namedCredential) {
-        if (String.isBlank(namedCredential)) {
-            throw new IllegalArgumentException('Named Credential cannot be blank');
+    public DeployToolingClient(String namedCredential, Boolean useSessionId) {
+        if (!useSessionId && String.isBlank(namedCredential)) {
+            throw new IllegalArgumentException(DeployConstants.ERR_NC_BLANK);
         }
         this.namedCredential = namedCredential;
+        this.useSessionId = useSessionId;
     }
 
     /**
@@ -24,19 +27,12 @@ public with sharing class DeployToolingClient implements DeployToolingClientInte
      * @return The HttpResponse returned from the API.
      */
     public HttpResponse query(String soql) {
-        String base = formatNamedCredential();
-        String endpoint = base
-            + DeployConstants.SERVICES_BASE_PATH
+        String endpointPath = DeployConstants.SERVICES_BASE_PATH
             + DeployConstants.API_VERSION
             + DeployConstants.TOOLING_QUERY_PATH
             + EncodingUtil.urlEncode(soql, 'UTF-8');
 
-        HttpRequest req = new HttpRequest();
-        req.setEndpoint(endpoint);
-        req.setMethod('GET');
-        req.setHeader('Content-Type', 'application/json');
-
-        return new Http().send(req);
+        return sendRequest('GET', endpointPath);
     }
 
     /**
@@ -45,17 +41,33 @@ public with sharing class DeployToolingClient implements DeployToolingClientInte
      * @return The HttpResponse containing deploy result details.
      */
     public HttpResponse fetchDeployResult(Id deployRequestId) {
-        String base = formatNamedCredential();
         String path = DeployConstants.SERVICES_BASE_PATH
             + DeployConstants.API_VERSION
             + DeployConstants.METADATA_DEPLOY_REQUEST_PATH
             + String.valueOf(deployRequestId)
             + DeployConstants.METADATA_DEPLOY_REQUEST_SUFFIX;
 
+        return sendRequest('GET', path);
+    }
+
+    /**
+     * @description Helper that constructs and sends the HTTP request based on auth mode.
+     * @param httpMethod The HTTP method ('GET', 'POST', etc.).
+     * @param path The endpoint path after the base URL.
+     * @return The HttpResponse returned from the API.
+     */
+    @SuppressWarnings('PMD.ApexSuggestUsingNamedCred')
+    private HttpResponse sendRequest(String httpMethod, String path) {
         HttpRequest req = new HttpRequest();
-        req.setEndpoint(base + path);
-        req.setMethod('GET');
+        req.setMethod(httpMethod);
         req.setHeader('Content-Type', 'application/json');
+
+        if (useSessionId) {
+            req.setEndpoint(System.Url.getOrgDomainUrl().toExternalForm() + path);
+            req.setHeader('Authorization', 'Bearer ' + UserInfo.getSessionId());
+        } else {
+            req.setEndpoint(formatNamedCredential() + path);
+        }
 
         return new Http().send(req);
     }

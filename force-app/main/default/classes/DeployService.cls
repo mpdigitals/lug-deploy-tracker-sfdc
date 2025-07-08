@@ -7,15 +7,13 @@ public with sharing class DeployService {
 
     /**
      * @description Triggers a batch job to fetch deployment data between dates.
-     * - If only startDate is provided, syncs up to now.
-     * - If both are null, syncs from 2000-01-01 to now.
-     * - Uses batch size from custom metadata.
      * @param startDate The start of the date range.
      * @param endDate The optional end of the date range.
+     * @param enableStreaming Whether to emit Platform Events for progress tracking.
+     * @return The Id of the AsyncApexJob started.
      */
     @AuraEnabled
-    public static void syncDeployments(DateTime startDate, DateTime endDate) {
-        // Validate access early to avoid launching batch if unauthorized
+    public static Id syncDeployments(DateTime startDate, DateTime endDate, Boolean enableStreaming) {
         DeployAccessValidator.enforceAccess();
 
         String startIso = startDate != null ? startDate.formatGmt('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'') : null;
@@ -39,21 +37,7 @@ public with sharing class DeployService {
         }
 
         Integer batchSize = DeployCoreUtils.getBatchSize();
-        Database.executeBatch(new DeployRequestBatch(fromDateTime, toDateTime), batchSize);
-    }
-
-    /**
-     * @description Checks if a DeployRequestBatch job is currently running or queued.
-     * @return True if a sync is already in progress; false otherwise.
-     */
-    @SuppressWarnings('PMD.ApexCRUDViolation')
-    private static Boolean isSyncInProgress() {
-        List<AsyncApexJob> jobs = [
-            SELECT Id
-            FROM AsyncApexJob
-            WHERE ApexClass.Name = 'DeployRequestBatch'
-            AND Status IN ('Queued', 'Processing', 'Preparing')
-        ];
-        return !jobs.isEmpty();
+        DeployRequestBatch batch = new DeployRequestBatch(fromDateTime, toDateTime, enableStreaming);
+        return Database.executeBatch(batch, batchSize);
     }
 }

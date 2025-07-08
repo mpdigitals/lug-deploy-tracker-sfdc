@@ -12,6 +12,7 @@ public class DeploySetupWrapper {
     @AuraEnabled public Boolean retrieveIntermediateStates {get;set;}
     @AuraEnabled public Integer batchSize {get;set;}
     @AuraEnabled public String namedCredential {get;set;}
+    @AuraEnabled public Boolean sessionId {get;set;}
 
     /**
      * @description Empty constructor required for AuraEnabled deserialization.
@@ -33,5 +34,6 @@ public class DeploySetupWrapper {
         retrieveIntermediateStates = rec.RetrieveIntermediateStates__c;
         batchSize = rec.BatchSize__c == null ? DeployConstants.MAX_BATCH_SIZE : Integer.valueOf(rec.BatchSize__c);
         namedCredential = rec.NamedCredential__c;
+        sessionId = rec.SessionId__c;
     }
 }

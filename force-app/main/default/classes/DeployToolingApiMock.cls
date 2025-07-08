@@ -19,7 +19,10 @@ public class DeployToolingApiMock implements HttpCalloutMock {
             : 'deployToolingApiResponse';
 
         StaticResource sr = [
-            SELECT Body FROM StaticResource WHERE Name = :staticName LIMIT 1
+            SELECT Body 
+            FROM StaticResource 
+            WHERE Name = :staticName 
+            LIMIT 1 
         ];
 
         String json = sr.Body.toString();

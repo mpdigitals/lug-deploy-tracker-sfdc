@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>ExtId__c</fullName>
     <caseSensitive>true</caseSensitive>
+    <deprecated>false</deprecated>
     <description>External Id</description>
     <externalId>true</externalId>
     <label>ExtId</label>

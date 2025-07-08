@@ -41,6 +41,26 @@
         <h3 class="slds-text-title_caps slds-p-vertical_x-small">{executionSectionTitle}</h3>
       </div>
       <div class="slds-form">
+        <div class="slds-col slds-size_3-of-12">
+          <lightning-input
+            type="checkbox"
+            label="Use Session ID"
+            checked={useSessionId}
+            onchange={handleUseSessionIdChange}
+          ></lightning-input>
+        </div>  
+
+        <div class="slds-size_3-of-12">
+          <lightning-combobox
+            label={namedCredentialLabel}
+            value={namedCredential}
+            options={namedCredentialOptions}
+            placeholder={namedCredentialPlaceholder}
+            onchange={handleNamedCredentialChange}
+            disabled={useSessionId}>
+          </lightning-combobox>
+        </div>  
+
         <div class="slds-size_3-of-12">
           <lightning-input
             type="number"
@@ -55,17 +75,6 @@
             onchange={handleBatchSizeChange}>
           </lightning-input>
         </div>
-
-        <div class="slds-size_3-of-12">
-          <lightning-combobox
-            label={namedCredentialLabel}
-            value={namedCredential}
-            options={namedCredentialOptions}
-            required
-            placeholder={namedCredentialPlaceholder}
-            onchange={handleNamedCredentialChange}>
-          </lightning-combobox>
-        </div>  
       </div>
     </div>
 

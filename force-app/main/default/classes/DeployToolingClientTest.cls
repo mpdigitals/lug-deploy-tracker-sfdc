@@ -1,13 +1,17 @@
-@isTest
+@IsTest
 private class DeployToolingClientTest {
+
     @SuppressWarnings('PMD.AvoidHardcodingId')
-    @isTest
-    static void testFetchDeployResultWithMockedResponse() {
+    @IsTest
+    static void testMockedFetch() {
         Test.setMock(HttpCalloutMock.class, new DeployToolingApiMock());
 
+        // Test data
         Id deployId = Id.valueOf('0AfQy00000Kf1XhKAJ');
         Id parentId = Id.valueOf('a01100000000000AAA');
-        DeployToolingClient client = new DeployToolingClient('Mocked_NC');
+
+        // Updated constructor: include useSessionId param
+        DeployToolingClient client = new DeployToolingClient('Mocked_NC', false);
 
         Test.startTest();
         HttpResponse response = client.fetchDeployResult(deployId);
@@ -30,13 +34,18 @@ private class DeployToolingClientTest {
         for (DeployResultTest__c result : testResults) {
             if (!result.Success__c) {
                 hasFailure = true;
-                Assert.isTrue(result.StackTrace__c != null && result.StackTrace__c.contains('MyServiceClass'), 'Failure stack trace should be present');
+                Assert.isTrue(
+                    result.StackTrace__c != null && result.StackTrace__c.contains('MyServiceClass'),
+                    'Failure stack trace should be present'
+                );
             }
         }
         Assert.isTrue(hasFailure, 'At least one test result should be a failure');
 
         Assert.areEqual(2, components.size(), 'Should map 2 components');
         Assert.areEqual('ApexClass', components[0].ComponentType__c, 'Component type should match');
-        Assert.isTrue(components[0].FullName__c.startsWith('MyServiceClass'), 'Component name should match expected prefix');
+        Assert.isTrue(components[0].FullName__c.startsWith('MyServiceClass'),
+            'Component name should match expected prefix'
+        );
     }
 }

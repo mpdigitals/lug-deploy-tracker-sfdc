@@ -12,7 +12,7 @@ private class DeployCoreUtilsTest {
         cfg.IsEnabled__c = false;
         cfg.FrequencyUnit__c = 'days';
         cfg.FrequencyValue__c = 1;
-        cfg.NamedCredential__c = 'DummyNC';
+        cfg.NamedCredential__c = 'TestNC';
         cfg.RetrieveComponents__c = true;
         cfg.RetrieveTests__c = true;
         cfg.RetrieveIntermediateStates__c = false;
@@ -41,34 +41,41 @@ private class DeployCoreUtilsTest {
         Assert.isTrue(v >= DeployConstants.MIN_BATCH_SIZE, 'Batch size should be >= MIN_BATCH_SIZE');
     }
 
-    @IsTest
+    @isTest
     static void testUpdateConfigAsync() {
         DeployAccessValidator.testAccess = true;
+
+        // Setup mock callout response
+        Test.setMock(HttpCalloutMock.class, new DeployToolingApiMock());
+
         DeploySetupWrapper wrapper = new DeploySetupWrapper();
         wrapper.startTime = System.now().addMinutes(2);
         wrapper.isEnabled = true;
         wrapper.frequencyUnit = 'days';
         wrapper.frequencyValue = '1';
+        wrapper.sessionId = false;
 
         Test.startTest();
         DeployCoreUtils.updateDeployConfig(wrapper);
         Test.stopTest();
 
         DeploySetup__c cfg = DeploySetup__c.getOrgDefaults();
-        Assert.isTrue(cfg.IsEnabled__c, 'IsEnabled should be true');
-        Assert.areEqual('days', cfg.FrequencyUnit__c, 'FrequencyUnit should be days');
-        Assert.areEqual(1, cfg.FrequencyValue__c, 'FrequencyValue should be 1');
+        Assert.isTrue(cfg.IsEnabled__c, 'Expected IsEnabled__c to be true');
+        Assert.areEqual('days', cfg.FrequencyUnit__c, 'Expected FrequencyUnit__c to be "days"');
+        Assert.areEqual(1, cfg.FrequencyValue__c, 'Expected FrequencyValue__c to be 1');
     }
 
     @IsTest
     static void testUpdateAdvancedAsync() {
         DeployAccessValidator.testAccess = true;
+
         DeploySetupWrapper wrapper = new DeploySetupWrapper();
         wrapper.retrieveIntermediateStates = true;
         wrapper.retrieveComponents = true;
         wrapper.retrieveTests = true;
         wrapper.batchSize = 10;
-        wrapper.namedCredential = 'DummyNC';
+        wrapper.namedCredential = 'TestNC';
+        wrapper.sessionId = false;
 
         Test.startTest();
         DeployCoreUtils.updateAdvancedSettings(wrapper);
@@ -78,7 +85,7 @@ private class DeployCoreUtilsTest {
         Assert.areEqual(10, cfg.BatchSize__c, 'Batch size should be updated');
         Assert.isTrue(cfg.RetrieveComponents__c, 'RetrieveComponents should be true');
         Assert.isTrue(cfg.RetrieveTests__c, 'RetrieveTests should be true');
-        Assert.isTrue(cfg.NamedCredential__c == 'DummyNC', 'NamedCredential should be DummyNC');
+        Assert.areEqual('TestNC', cfg.NamedCredential__c, 'NamedCredential__c should match');
     }
 
     @IsTest
@@ -87,6 +94,7 @@ private class DeployCoreUtilsTest {
             FrequencyUnit__c = 'days',
             FrequencyValue__c = 1
         );
+
         Datetime d = DeployCoreUtils.calculateFromTime(dummy, System.now());
         Assert.isNotNull(d, 'calculateFromTime should return a datetime');
 
@@ -94,7 +102,7 @@ private class DeployCoreUtilsTest {
         Assert.isTrue(cron.length() > 0, 'buildCron should return a non-empty string');
 
         String h = DeployCoreUtils.generateMd5Short('abc');
-        Assert.areEqual(18, h.length(), 'MD5 short hash should be 18 characters long');
+        Assert.areEqual(18, h.length(), 'MD5 short hash should be 18 chars long');
 
         String p = DeployCoreUtils.patchJsonKeys('{"a":"b"}', new Map<String, String>{'a' => 'z'});
         Assert.isTrue(p.contains('z'), 'patchJsonKeys should replace keys correctly');

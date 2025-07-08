@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Deleted__c</fullName>
     <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
     <description>True if the component was deleted in the deployment.</description>
     <label>Deleted</label>
     <trackTrending>false</trackTrending>

@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>SinglePackage__c</fullName>
     <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
     <description>Indicates whether the deployment is treated as a single package, meaning all components are part of one package directory.</description>
     <label>Single Package</label>
     <trackTrending>false</trackTrending>

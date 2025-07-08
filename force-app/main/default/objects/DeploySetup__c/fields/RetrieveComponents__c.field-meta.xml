@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>RetrieveComponents__c</fullName>
     <defaultValue>true</defaultValue>
+    <deprecated>false</deprecated>
     <description>Retrieve Components</description>
     <label>Retrieve Components</label>
     <trackTrending>false</trackTrending>

@@ -20,9 +20,10 @@ private class DeployServiceTest {
     static void testSyncDeploymentsNoDates() {
         setupTestConfig();
         DeployAccessValidator.testAccess = true;
+        Test.setMock(HttpCalloutMock.class, new DeployToolingApiMock());
 
         Test.startTest();
-        DeployService.syncDeployments(null, null);
+        DeployService.syncDeployments((DateTime)null, (DateTime)null, true);
         Test.stopTest();
 
         Assert.isTrue(true, 'syncDeployments should complete with null dates');
@@ -32,12 +33,10 @@ private class DeployServiceTest {
     static void testSyncDeploymentsStartOnly() {
         setupTestConfig();
         DeployAccessValidator.testAccess = true;
+        Test.setMock(HttpCalloutMock.class, new DeployToolingApiMock());
 
-        Datetime fromDate = Datetime.now().addDays(-1);
-
-        Test.startTest();
-        DeployService.syncDeployments(fromDate, null);
-        Test.stopTest();
+        DateTime fromDate = (DateTime)Datetime.now().addDays(-1);
+        DeployService.syncDeployments(fromDate, (DateTime)null, true);
 
         Assert.isTrue(true, 'syncDeployments should complete with fromDate only');
     }
@@ -46,13 +45,11 @@ private class DeployServiceTest {
     static void testSyncDeploymentsStartAndEnd() {
         setupTestConfig();
         DeployAccessValidator.testAccess = true;
+        Test.setMock(HttpCalloutMock.class, new DeployToolingApiMock());
 
-        Datetime fromDate = Datetime.now().addDays(-2);
-        Datetime toDate   = Datetime.now();
-
-        Test.startTest();
-        DeployService.syncDeployments(fromDate, toDate);
-        Test.stopTest();
+        DateTime fromDate = (DateTime)Datetime.now().addDays(-2);
+        DateTime toDate = (DateTime)Datetime.now();
+        DeployService.syncDeployments(fromDate, toDate, true);
 
         Assert.isTrue(true, 'syncDeployments should complete with from and to dates');
     }
@@ -61,9 +58,10 @@ private class DeployServiceTest {
     static void testSyncDeploymentsInvalidDate() {
         setupTestConfig();
         DeployAccessValidator.testAccess = true;
+        Test.setMock(HttpCalloutMock.class, new DeployToolingApiMock());
 
         Test.startTest();
-        DeployService.syncDeployments(null, null);
+        DeployService.syncDeployments((DateTime)null, (DateTime)null, true);
         Test.stopTest();
 
         Assert.isTrue(true, 'syncDeployments should complete gracefully with invalid dates');

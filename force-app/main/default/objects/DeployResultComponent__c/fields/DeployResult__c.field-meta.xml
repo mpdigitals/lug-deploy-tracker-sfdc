@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>DeployResult__c</fullName>
+    <deprecated>false</deprecated>
     <description>Lookup to the parent deployment result record.</description>
     <label>Deploy Result</label>
     <referenceTo>DeployResult__c</referenceTo>

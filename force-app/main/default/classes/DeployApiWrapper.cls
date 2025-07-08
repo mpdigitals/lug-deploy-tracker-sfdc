@@ -10,12 +10,12 @@ public with sharing class DeployApiWrapper {
      * @description Constructor that initializes the API client using the given Named Credential.
      * @param namedCredential Name of the Named Credential to use for API access.
      */
-    public DeployApiWrapper(String namedCredential) {
-        DeployValidator.validateNamedCredential(namedCredential);
-        client = new DeployToolingClient(namedCredential);
+    public DeployApiWrapper(String namedCredential, Boolean sessionId) {
+        DeployValidator.validateNamedCredential(namedCredential, sessionId);
+        client = new DeployToolingClient(namedCredential, sessionId);
     }
 
-    /**
+    /**s
      * @description Fetches deployment results for the provided list of IDs using the Tooling API.
      * @param ids List of DeployRequest IDs to retrieve.
      * @return List of DeployRequest objects with detailed deployment data.

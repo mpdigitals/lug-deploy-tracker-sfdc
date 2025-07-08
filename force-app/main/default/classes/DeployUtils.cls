@@ -82,4 +82,13 @@ public class DeployUtils {
     public static Datetime parseIso(String iso) {
         return Datetime.valueOfGmt(iso.replace('T', ' ').replace('Z', ''));
     }
+
+    /**
+     * @description Retrieves the next scheduled Datetime of the deployment job, or null if none exist.
+     * @return Next scheduled Datetime or null.
+     */
+    public static Datetime getNextScheduledRun() {
+        List<CronTrigger> jobs = DeploySetupRepository.getActiveDeployJobs();
+        return jobs.isEmpty() ? null : jobs[0].NextFireTime;
+    }
 }

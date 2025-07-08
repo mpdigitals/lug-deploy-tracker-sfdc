@@ -21,14 +21,6 @@
     <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
     <label>Lug Deploy Tracker</label>
     <navType>Console</navType>
-    <profileActionOverrides>
-        <actionName>Tab</actionName>
-        <content>Deploy_Home_Page</content>
-        <formFactor>Large</formFactor>
-        <pageOrSobjectType>standard-home</pageOrSobjectType>
-        <type>Flexipage</type>
-        <profile>Admin</profile>
-    </profileActionOverrides>
     <tabs>standard-home</tabs>
     <tabs>DeployResult__c</tabs>
     <tabs>DeployResultComponent__c</tabs>

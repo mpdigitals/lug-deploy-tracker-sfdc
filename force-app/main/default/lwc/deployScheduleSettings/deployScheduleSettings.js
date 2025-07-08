@@ -15,8 +15,9 @@ const LIMITS = {
 };
 
 const TOAST_VARIANTS = {
-  ERROR: 'error',
-  SUCCESS: 'success'
+  SUCCESS: 'success',
+  WARNING: 'warning',
+  ERROR: 'error'
 };
 
 const MESSAGES = {

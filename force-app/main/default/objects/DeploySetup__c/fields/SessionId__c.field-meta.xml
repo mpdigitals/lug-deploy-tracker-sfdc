@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>SeeAllData__c</fullName>
+    <fullName>SessionId__c</fullName>
     <defaultValue>false</defaultValue>
     <deprecated>false</deprecated>
-    <description>Indicates whether the deployment was executed with full access to org data (seeAllData=true).</description>
-    <label>See All Data</label>
+    <description>Session Id Authentication</description>
+    <label>Session Id</label>
     <trackTrending>false</trackTrending>
     <type>Checkbox</type>
 </CustomField>

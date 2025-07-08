@@ -1,9 +1,8 @@
 @IsTest
 public class DeployRequestBatchTest {
 
-    @IsTest
-    static void testDeployRequestBatchEndToEnd() {
-        DeploySetup__c setup = new DeploySetup__c(
+    static void createBasicSetup() {
+        insert new DeploySetup__c(
             StartTime__c = System.now().addMinutes(5),
             IsEnabled__c = true,
             FrequencyUnit__c = 'days',
@@ -12,19 +11,23 @@ public class DeployRequestBatchTest {
             RetrieveComponents__c = true,
             RetrieveTests__c = true,
             RetrieveIntermediateStates__c = false,
-            BatchSize__c = 50
+            BatchSize__c = 50,
+            sessionId__c = true
         );
-        insert setup;
 
         DeployAccessValidator.testAccess = true;
-
         Test.setMock(HttpCalloutMock.class, new DeployToolingApiMock());
+    }
+
+    @IsTest
+    static void testDeployRequestBatchEndToEnd() {
+        createBasicSetup();
 
         Datetime startTime = Datetime.newInstance(Date.today(), Time.newInstance(10, 0, 0, 0));
         Datetime endTime = startTime.addMinutes(30);
 
         Test.startTest();
-        Database.executeBatch(new DeployRequestBatch(startTime, endTime), 1);
+        Database.executeBatch(new DeployRequestBatch(startTime, endTime, true), 1);
         Test.stopTest();
 
         List<DeployResult__c> results = [SELECT Id, Status__c FROM DeployResult__c];
@@ -52,9 +55,47 @@ public class DeployRequestBatchTest {
         Assert.isFalse(tests[2].Success__c, 'Expected third test to fail');
 
         DeployResult__c resultWithWarnings = [SELECT Id, ErrorMessage__c, ErrorStatusCode__c FROM DeployResult__c LIMIT 1];
-
         Assert.isFalse(String.isBlank(resultWithWarnings.ErrorMessage__c), 'Expected ErrorMessage__c to contain coverage warnings');
         Assert.isTrue(resultWithWarnings.ErrorMessage__c.contains('Test coverage of selected Apex Class'), 'Expected coverage warning message');
         Assert.areEqual(DeployConstants.ERR_TEST_COVERAGE, resultWithWarnings.ErrorStatusCode__c, 'Expected ErrorStatusCode__c to be ERR_TEST_COVERAGE');
+    }
+
+    @IsTest
+    static void testGetBatchStatusNullId() {
+        Map<String, String> result = DeployRequestBatch.getBatchStatus(null);
+        Assert.areEqual('Unknown', result.get('status'), 'Status should be Unknown when batchId is null');
+        Assert.areEqual('0', result.get('numberOfErrors'), 'NumberOfErrors should be 0 when batchId is null');
+        Assert.areEqual(DeployConstants.ERR_BATCH_ID_REQUIRED, result.get('extendedStatus'), 'Should return ERR_BATCH_ID_REQUIRED when batchId is null');
+    }
+
+    @IsTest
+    @SuppressWarnings('PMD.AvoidHardcodingId')
+    static void testGetBatchStatusNotFound() {
+        Id fakeId = Id.valueOf('707000000000000AAA');
+        Map<String, String> result = DeployRequestBatch.getBatchStatus(fakeId);
+        Assert.areEqual('Unknown', result.get('status'), 'Status should be Unknown for non-existent batchId');
+        Assert.areEqual('0', result.get('numberOfErrors'), 'NumberOfErrors should be 0 for non-existent batchId');
+        Assert.areEqual(DeployConstants.ERR_BATCH_NOT_FOUND, result.get('extendedStatus'), 'Should return ERR_BATCH_NOT_FOUND for non-existent batchId');
+    }
+
+    @IsTest
+    static void testGetBatchStatusValidJob() {
+        createBasicSetup();
+
+        Test.startTest();
+        Id batchId = Database.executeBatch(new DeployRequestBatch(DateTime.now(), DateTime.now(), true), 1);
+        Test.stopTest();
+
+        AsyncApexJob job = [
+            SELECT Id, Status, NumberOfErrors, ExtendedStatus 
+            FROM AsyncApexJob 
+            WHERE Id = :batchId 
+            LIMIT 1
+        ];
+
+        Map<String, String> result = DeployRequestBatch.getBatchStatus(batchId);
+        Assert.areEqual(String.valueOf(job.Status), result.get('status'), 'Status should match the AsyncApexJob status');
+        Assert.areEqual(String.valueOf(job.NumberOfErrors), result.get('numberOfErrors'), 'NumberOfErrors should match AsyncApexJob');
+        Assert.areEqual(job.ExtendedStatus != null ? job.ExtendedStatus : '', result.get('extendedStatus'), 'ExtendedStatus should match or be empty');
     }
 }

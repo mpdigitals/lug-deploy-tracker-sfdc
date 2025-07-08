@@ -370,8 +370,8 @@
     <dashboardType>SpecifiedUser</dashboardType>
     <description>Monitor deployment activity, results, and trends</description>
     <isGridLayout>true</isGridLayout>
-    <owner>julio.melon@mpdigitals.com.dev</owner>
-    <runningUser>julio.melon@mpdigitals.com.dev</runningUser>
+    <owner>develop@sample.com</owner>
+    <runningUser>develop@sample.com</runningUser>
     <textColor>#000000</textColor>
     <title>Deploy Dashboard</title>
     <titleColor>#000000</titleColor>

@@ -5,6 +5,10 @@
         <visible>true</visible>
     </applicationVisibilities>
     <classAccesses>
+        <apexClass>DeployAccessValidator</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>DeployApiWrapper</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -41,6 +45,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>DeploySetupRepository</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DeploySetupWrapper</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>DeployToolingClient</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -60,9 +72,13 @@
         <enabled>true</enabled>
         <name>DeployAdminAccess</name>
     </customPermissions>
-    <description>Grants access to the deployment administration.</description>
+    <customSettingAccesses>
+        <enabled>true</enabled>
+        <name>DeploySetup__c</name>
+    </customSettingAccesses>
+    <description>Grants access to the deployment administration for named Credentials authenticatoin.</description>
     <hasActivationRequired>false</hasActivationRequired>
-    <label>Deploy Admin Access</label>
+    <label>Deploy Admin Access NC</label>
     <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>false</allowDelete>

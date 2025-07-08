@@ -4,10 +4,10 @@ private class DeployApiWrapperTest {
     @IsTest
     static void testGetDeployResults() {
         Test.setMock(HttpCalloutMock.class, new DeployToolingApiMock());
-        DeployApiWrapper wrapper = new DeployApiWrapper('Test_NC');
 
-        List<Id> ids = new List<Id>{ '0A1xx000000Xyz1AAA', '0A1xx000000Xyz2BBB' };
+        DeployApiWrapper wrapper = new DeployApiWrapper('Test_NC', false);
 
+        List<Id> ids = new List<Id>{'0A1xx000000Xyz1AAA', '0A1xx000000Xyz2BBB'};
         List<DeployApiWrapper.DeployRequest> results = wrapper.getDeployResults(ids);
 
         Assert.isNotNull(results, 'Results list should not be null');
@@ -18,7 +18,6 @@ private class DeployApiWrapperTest {
         Assert.isNotNull(first.deployResult, 'DeployResult should not be null');
 
         DeployApiWrapper.DeployResult dr = first.deployResult;
-
         Assert.isNotNull(dr.details, 'Details should not be null');
         Assert.isNotNull(dr.details.allComponentMessages, 'Components list should not be null');
         Assert.isTrue(dr.details.allComponentMessages.size() > 0, 'Components list should not be empty');
@@ -32,20 +31,19 @@ private class DeployApiWrapperTest {
     }
 
     @IsTest
-    static void testConstructorThrowsOnBlankNamedCredential() {
+    static void testConstructorFailsOnBlankName() {
         Boolean thrown = false;
         try {
-            DeployApiWrapper wrapper = new DeployApiWrapper('');
-        } catch (IllegalArgumentException e) {
+            new DeployApiWrapper('', false);
+        } catch (Exception e) {
             thrown = true;
-            Assert.areEqual('Named Credential cannot be blank', e.getMessage(), 'Expected message for blank Named Credential');
         }
-        Assert.isTrue(thrown, 'Expected IllegalArgumentException for blank namedCredential');
+        Assert.isTrue(thrown, 'Expected exception for blank namedCredential');
     }
 
     @IsTest
-    static void testGetDeployResuForNullOrEmpty() {
-        DeployApiWrapper wrapper = new DeployApiWrapper('Test_NC');
+    static void testGetResultsEmptyInput() {
+        DeployApiWrapper wrapper = new DeployApiWrapper('Test_NC', false);
 
         List<DeployApiWrapper.DeployRequest> resultsNull = wrapper.getDeployResults(null);
         Assert.isNotNull(resultsNull, 'Should not return null for null input');

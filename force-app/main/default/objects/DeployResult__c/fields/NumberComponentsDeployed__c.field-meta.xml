@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>NumberComponentsDeployed__c</fullName>
+    <deprecated>false</deprecated>
     <description>Number of components deployed successfully.</description>
     <externalId>false</externalId>
     <label>Deployed</label>

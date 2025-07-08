@@ -28,10 +28,9 @@ public without sharing class DeployCoreUtils {
      * @description Retrieves the next scheduled execution time for the deployment job.
      * @return Datetime of the next scheduled job or null if none exist.
      */
-    @AuraEnabled(cacheable = false)
+    @AuraEnabled
     public static Datetime getNextRun() {
-        List<CronTrigger> jobs = DeploySetupRepository.getActiveDeployJobs();
-        return jobs.isEmpty() ? null : jobs[0].NextFireTime;
+        return DeployUtils.getNextScheduledRun();
     }
 
     /**
@@ -58,6 +57,11 @@ public without sharing class DeployCoreUtils {
      */
     @AuraEnabled
     public static void updateAdvancedSettings(DeploySetupWrapper config) {
+        DeployValidator.validateAdvancedSettings(
+            config.batchSize,
+            config.namedCredential,
+            config.sessionId
+        );
         DeploySetupRepository.updateAdvancedSettings(config);
     }
 

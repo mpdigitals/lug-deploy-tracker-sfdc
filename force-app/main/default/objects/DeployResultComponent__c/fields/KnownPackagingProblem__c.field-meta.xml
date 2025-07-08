@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>KnownPackagingProblem__c</fullName>
     <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
     <description>Known Packaging Problem</description>
     <label>Known Packaging Problem</label>
     <trackTrending>false</trackTrending>

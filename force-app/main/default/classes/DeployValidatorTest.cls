@@ -189,7 +189,7 @@ private class DeployValidatorTest {
         ex = false;
         try {
             DeployValidator.validateSyncDates(
-                toIso(System.now().addDays(-DeployConstants.MAX_RANGE_DAYS - 1)),
+                toIso(System.now().addDays(-DeployConstants.DAYS_MAX - 1)),
                 null
             );
         } catch (Exception e) {
@@ -212,7 +212,7 @@ private class DeployValidatorTest {
         try {
             DeployValidator.validateSyncDates(
                 null,
-                toIso(System.now().addDays(DeployConstants.MAX_RANGE_DAYS + 1))
+                toIso(System.now().addDays(DeployConstants.DAYS_MAX + 1))
             );
         } catch (Exception e) {
             ex = true;
@@ -224,7 +224,7 @@ private class DeployValidatorTest {
     static void testAdvancedSettingsValid() {
         DeployAccessValidator.testAccess = true;
         DeploySetupWrapper wrapper = createBaseWrapper();
-        DeployValidator.validateAdvancedSettings(wrapper.batchSize, wrapper.namedCredential);
+        DeployValidator.validateAdvancedSettings(wrapper.batchSize, wrapper.namedCredential, true);
         Assert.isTrue(true, 'Advanced settings should be valid');
     }
 
@@ -237,7 +237,7 @@ private class DeployValidatorTest {
         try {
             DeploySetupWrapper wrapper = createBaseWrapper();
             wrapper.batchSize = 0;
-            DeployValidator.validateAdvancedSettings(wrapper.batchSize, wrapper.namedCredential);
+            DeployValidator.validateAdvancedSettings(wrapper.batchSize, wrapper.namedCredential, true);
         } catch (Exception e) {
             ex = true;
         }
@@ -247,7 +247,7 @@ private class DeployValidatorTest {
         try {
             DeploySetupWrapper wrapper = createBaseWrapper();
             wrapper.batchSize = DeployConstants.MAX_BATCH_SIZE + 1;
-            DeployValidator.validateAdvancedSettings(wrapper.batchSize, wrapper.namedCredential);
+            DeployValidator.validateAdvancedSettings(wrapper.batchSize, wrapper.namedCredential, true);
         } catch (Exception e) {
             ex = true;
         }
@@ -262,7 +262,7 @@ private class DeployValidatorTest {
         try {
             DeploySetupWrapper wrapper = createBaseWrapper();
             wrapper.namedCredential = '';
-            DeployValidator.validateAdvancedSettings(wrapper.batchSize, wrapper.namedCredential);
+            DeployValidator.validateAdvancedSettings(wrapper.batchSize, wrapper.namedCredential, false);
         } catch (Exception e) {
             ex = true;
         }
@@ -303,20 +303,8 @@ private class DeployValidatorTest {
     @IsTest
     static void testNamedCredentialOk() {
         DeployAccessValidator.testAccess = true;
-        DeployValidator.assertNamedCredential('TestNC');
+        DeployValidator.validateNamedCredential('TestNC', true);
         Assert.isTrue(true, 'assertNamedCredential should pass for non-blank NC');
-    }
-
-    @IsTest
-    static void testNamedCredentialThrows() {
-        DeployAccessValidator.testAccess = true;
-        Boolean threw = false;
-        try {
-            DeployValidator.assertNamedCredential('');
-        } catch (IllegalArgumentException e) {
-            threw = true;
-        }
-        Assert.isTrue(threw, 'Expected exception for blank Named Credential');
     }
 
     @IsTest
@@ -337,11 +325,14 @@ private class DeployValidatorTest {
     @IsTest
     static void testAssertNoSyncThrows() {
         DeployAccessValidator.testAccess = true;
+
+        Test.setMock(HttpCalloutMock.class, new DeployToolingApiMock());
+
         Test.startTest();
         Database.executeBatch(
             new DeployRequestBatch(
                 System.now().addDays(-1), 
-                System.now()
+                System.now(), true
             ), 
             1
         );

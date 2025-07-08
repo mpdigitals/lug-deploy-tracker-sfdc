@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Success__c</fullName>
     <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
     <description>Indicates whether this specific component was deployed successfully.</description>
     <label>Success</label>
     <trackTrending>false</trackTrending>

@@ -6,15 +6,20 @@ private class DeploySetupRepositoryTest {
     }
 
     @TestSetup
-    static void baseSetup() {
+    static void setupData() {
         delete [SELECT Id FROM DeploySetup__c WHERE SetupOwnerId = :UserInfo.getOrganizationId()];
+
         DeploySetup__c cfg = new DeploySetup__c(
             SetupOwnerId = UserInfo.getOrganizationId(),
-            StartTime__c = System.now(),
+            StartTime__c = System.now().addMinutes(1),
             IsEnabled__c = false,
             FrequencyUnit__c = 'hours',
             FrequencyValue__c = 1,
-            NamedCredential__c = 'ToolingAPICredential'
+            NamedCredential__c = 'ToolingAPICredential',
+            RetrieveComponents__c = true,
+            RetrieveTests__c = true,
+            RetrieveIntermediateStates__c = false,
+            BatchSize__c = 10
         );
         insert cfg;
 
@@ -31,17 +36,18 @@ private class DeploySetupRepositoryTest {
     }
 
     private static DeploySetupWrapper createBaseWrapper() {
-        DeploySetupWrapper wrapper = new DeploySetupWrapper();
-        wrapper.startTime = System.now().addMinutes(5);
-        wrapper.frequencyUnit = 'hours';
-        wrapper.frequencyValue = '1';
-        wrapper.isEnabled = true;
-        wrapper.namedCredential = 'ToolingAPICredential';
-        wrapper.retrieveIntermediateStates = true;
-        wrapper.retrieveComponents = true;
-        wrapper.retrieveTests = true;
-        wrapper.batchSize = 10;
-        return wrapper;
+        DeploySetupWrapper w = new DeploySetupWrapper();
+        w.startTime = System.now().addMinutes(5);
+        w.frequencyUnit = 'hours';
+        w.frequencyValue = '1';
+        w.isEnabled = true;
+        w.namedCredential = 'ToolingAPICredential';
+        w.retrieveIntermediateStates = true;
+        w.retrieveComponents = true;
+        w.retrieveTests = true;
+        w.batchSize = 10;
+        w.sessionId = false;
+        return w;
     }
 
     @IsTest
@@ -76,7 +82,6 @@ private class DeploySetupRepositoryTest {
             wrapper.frequencyUnit = 'minutes';
             wrapper.frequencyValue = '';
             wrapper.isEnabled = true;
-
             DeploySetupRepository.enqueueScheduleUpdate(wrapper);
         } catch (Exception ex) {
             exceptionThrown = true;
@@ -88,18 +93,17 @@ private class DeploySetupRepositoryTest {
     static void testAdvancedSettingsValid() {
         DeployAccessValidator.testAccess = true;
 
-        DeploySetupWrapper wrapper = createBaseWrapper();
-        wrapper.retrieveTests = false;
-        wrapper.batchSize = 10;
+        DeploySetupWrapper w = createBaseWrapper();
+        w.retrieveTests = false;
+        w.batchSize = 10;
 
-        DeploySetupRepository.updateAdvancedSettings(wrapper);
+        DeploySetupRepository.updateAdvancedSettings(w);
 
         DeploySetup__c result = DeploySetup__c.getOrgDefaults();
-
         Assert.isTrue(result.RetrieveComponents__c, 'RetrieveComponents__c should be true');
         Assert.isFalse(result.RetrieveTests__c, 'RetrieveTests__c should be false');
         Assert.isTrue(result.RetrieveIntermediateStates__c, 'RetrieveIntermediateStates__c should be true');
-        Assert.areEqual(10, result.BatchSize__c, 'BatchSize should be 10');
+        Assert.areEqual(10, result.BatchSize__c, 'BatchSize__c should be 10');
     }
 
     @IsTest
@@ -107,10 +111,9 @@ private class DeploySetupRepositoryTest {
         DeployAccessValidator.testAccess = true;
         Boolean threw = false;
         try {
-            DeploySetupWrapper wrapper = createBaseWrapper();
-            wrapper.batchSize = 0;
-
-            DeploySetupRepository.updateAdvancedSettings(wrapper);
+            DeploySetupWrapper w = createBaseWrapper();
+            w.batchSize = 0;
+            DeploySetupRepository.updateAdvancedSettings(w);
         } catch (AuraHandledException e) {
             threw = true;
         }
@@ -124,6 +127,8 @@ private class DeploySetupRepositoryTest {
         cfg.IsEnabled__c = true;
         cfg.StartTime__c = System.now().addMinutes(5);
         update cfg;
+
+        Test.setMock(HttpCalloutMock.class, new DeployToolingApiMock());
 
         Test.startTest();
         DeploySetupRepository.rescheduleJobIfEnabled();
@@ -147,6 +152,8 @@ private class DeploySetupRepositoryTest {
         cfg.FrequencyValue__c = 1;
         update cfg;
 
+        Test.setMock(HttpCalloutMock.class, new DeployToolingApiMock());
+
         Test.startTest();
         DeploySetupRepository.rescheduleJobIfEnabled();
         Test.stopTest();
@@ -162,6 +169,7 @@ private class DeploySetupRepositoryTest {
     @IsTest
     static void testNoCronIfDisabled() {
         DeployAccessValidator.testAccess = true;
+
         for (CronTrigger ct : [
             SELECT Id FROM CronTrigger
             WHERE CronJobDetail.Name = 'TestJob'
@@ -189,15 +197,16 @@ private class DeploySetupRepositoryTest {
     @IsTest
     static void testInsertConfigWhenNoneExists() {
         DeployAccessValidator.testAccess = true;
+
         delete [SELECT Id FROM DeploySetup__c WHERE SetupOwnerId = :UserInfo.getOrganizationId()];
 
-        DeploySetupWrapper wrapper = createBaseWrapper();
-        wrapper.frequencyValue = '2';
-        wrapper.frequencyUnit = 'hours';
-        wrapper.isEnabled = true;
+        DeploySetupWrapper w = createBaseWrapper();
+        w.frequencyValue = '2';
+        w.frequencyUnit = 'hours';
+        w.isEnabled = true;
 
         Test.startTest();
-        DeploySetupRepository.updateScheduleSettings(wrapper);
+        DeploySetupRepository.updateScheduleSettings(w);
         Test.stopTest();
 
         DeploySetup__c result = DeploySetup__c.getOrgDefaults();

@@ -220,6 +220,16 @@
             <field>Type__c</field>
             <table>DeployResult__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>NumberComponentsTotalReal__c</field>
+            <table>DeployResult__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>NumberTestsTotalReal__c</field>
+            <table>DeployResult__c</table>
+        </columns>
         <masterLabel>Deploy Results</masterLabel>
     </sections>
     <sections>

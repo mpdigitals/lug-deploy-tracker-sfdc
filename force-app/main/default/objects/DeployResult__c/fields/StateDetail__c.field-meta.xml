@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>StateDetail__c</fullName>
+    <deprecated>false</deprecated>
     <description>Detailed internal state of the deployment.</description>
     <externalId>false</externalId>
     <label>State Detail</label>

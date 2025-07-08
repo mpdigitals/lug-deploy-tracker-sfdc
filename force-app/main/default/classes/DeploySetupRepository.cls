@@ -1,7 +1,7 @@
 /**
  * @description Repository class to handle access to deployment configuration stored in a Custom Setting,
  * including retrieval, validation, updates, and cron job management.
- * @author develop@mpdigitals.com
+ * Author: develop@mpdigitals.com
  */
 @SuppressWarnings('PMD.ApexCRUDViolation')
 public with sharing class DeploySetupRepository {
@@ -20,7 +20,13 @@ public with sharing class DeploySetupRepository {
      * @return DeploySetupWrapper object representing configuration.
      */
     public static DeploySetupWrapper getConfigWrapper() {
-        return new DeploySetupWrapper(getRawConfig());
+        DeployAccessValidator.enforceAccess();
+
+        DeploySetup__c raw = getRawConfig();
+        DeploySetupWrapper wrapper = new DeploySetupWrapper(raw);
+        wrapper.sessionId = raw.sessionId__c;
+
+        return wrapper;
     }
 
     /**
@@ -85,7 +91,12 @@ public with sharing class DeploySetupRepository {
      */
     public static void updateAdvancedSettings(DeploySetupWrapper config) {
         DeployAccessValidator.enforceAccess();
-        DeployValidator.validateNamedCredential(config.namedCredential);
+
+        if (config.sessionId == true) {
+            config.namedCredential = null;
+        }
+        
+        DeployValidator.validateNamedCredential(config.namedCredential, config.sessionId);
 
         if (config.batchSize == null
             || config.batchSize < DeployConstants.MIN_BATCH_SIZE
@@ -109,6 +120,7 @@ public with sharing class DeploySetupRepository {
         cfg.RetrieveTests__c = config.retrieveTests;
         cfg.BatchSize__c = config.batchSize;
         cfg.NamedCredential__c = config.namedCredential;
+        cfg.SessionId__c = config.sessionId;
 
         upsert cfg;
     }
@@ -139,4 +151,5 @@ public with sharing class DeploySetupRepository {
             System.schedule(jobName, cron, new DeployScheduleService());
         }
     }
+
 }

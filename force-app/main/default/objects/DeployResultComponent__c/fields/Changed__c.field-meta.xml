@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Changed__c</fullName>
     <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
     <description>True if the component was changed as part of this deployment.</description>
     <label>Changed</label>
     <trackTrending>false</trackTrending>

@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>warning__c</fullName>
     <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
     <description>the component was deployed with warnings.</description>
     <label>warning</label>
     <trackTrending>false</trackTrending>

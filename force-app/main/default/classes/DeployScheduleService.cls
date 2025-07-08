@@ -1,9 +1,10 @@
 /**
  * @description Schedulable that triggers the DeployRequestBatch at the configured interval
  * and reschedules itself based on the configuration in DeploySetup__c.
- * @author develop@mpdigitals.com
+ * Author: develop@mpdigitals.com
  */
 public with sharing class DeployScheduleService implements Schedulable {
+
     /**
      * @description Entry point of the scheduled job. Executes the deployment sync batch
      * and reschedules the next run based on current configuration.
@@ -12,18 +13,18 @@ public with sharing class DeployScheduleService implements Schedulable {
     public void execute(SchedulableContext sc) {
         DeployAccessValidator.enforceAccess();
         DeploySetupWrapper cfg = DeploySetupRepository.getConfigWrapper();
+
         if (cfg == null || !cfg.isEnabled || cfg.startTime == null) {
             return;
         }
 
         Datetime toTime = cfg.startTime;
         Datetime fromTime = DeployUtils.calculateFromTime(DeploySetupRepository.getRawConfig(), toTime);
-        Integer batchSize = cfg.batchSize != null
-            ? cfg.batchSize
-            : DeployCoreUtils.getBatchSize();
+
+        Integer batchSize = cfg.batchSize != null ? cfg.batchSize : DeployCoreUtils.getBatchSize();
 
         Database.executeBatch(
-            new DeployRequestBatch(fromTime, toTime, cfg),
+            new DeployRequestBatch(fromTime, toTime, cfg, false),
             batchSize
         );
 
@@ -55,8 +56,8 @@ public with sharing class DeployScheduleService implements Schedulable {
         }
 
         String cronExpr = DeployUtils.buildCron(nextStart);
-
         String jobName = DeployConstants.JOB_NAME + ' - ' + nextStart.format('yyyy-MM-dd HH:mm');
+
         System.schedule(jobName, cronExpr, new DeployScheduleService());
 
         if (Schema.sObjectType.DeploySetup__c.isUpdateable()) {

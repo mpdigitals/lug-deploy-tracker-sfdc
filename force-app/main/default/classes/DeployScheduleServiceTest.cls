@@ -13,12 +13,13 @@ private class DeployScheduleServiceTest {
             RetrieveTests__c = true
         );
     }
-
+    @SuppressWarnings('PMD.ExcessiveParameterList')
     private static void runScheduleTest(String unit, String value, Boolean enabled, String message) {
         DeploySetup__c setup = createSetup(unit, value, enabled);
         insert setup;
 
         DeployAccessValidator.testAccess = true;
+        Test.setMock(HttpCalloutMock.class, new DeployToolingApiMock());
 
         Test.startTest();
         try {

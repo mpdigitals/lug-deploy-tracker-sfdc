@@ -2,7 +2,6 @@
  * @description Handles validation logic for deployment configuration, including frequency input and batch size.
  * @author develop@mpdigitals.com
  */
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.ApexCRUDViolation')
 public with sharing class DeployValidator {
 
     public static Boolean validateNCInTest = false;
@@ -12,6 +11,7 @@ public with sharing class DeployValidator {
      * @param startIso Start date as ISO string.
      * @param endIso End date as ISO string.
      */
+    @SuppressWarnings('PMD.CognitiveComplexity')
     public static void validateSyncDates(String startIso, String endIso) {
         Datetime now = System.now();
 
@@ -20,7 +20,7 @@ public with sharing class DeployValidator {
             if (startDt > now) {
                 throw new AuraHandledException(DeployConstants.ERR_START_AFTER_TODAY);
             }
-            Date minStart = now.addDays(-DeployConstants.MAX_RANGE_DAYS).date();
+            Date minStart = now.addDays(-DeployConstants.DAYS_MAX).date();
             if (startDt < minStart) {
                 throw new AuraHandledException(minStart.format());
             }
@@ -43,11 +43,11 @@ public with sharing class DeployValidator {
 
         if (startIso == null && endIso != null) {
             Datetime endDt = DeployUtils.parseIso(endIso);
-            Datetime maxEnd = now.addDays(DeployConstants.MAX_RANGE_DAYS);
+            Datetime maxEnd = now.addDays(DeployConstants.DAYS_MAX);
             if (endDt > maxEnd) {
                 throw new AuraHandledException(String.format(
                     DeployConstants.ERR_END_TOO_FAR,
-                    new List<String>{ String.valueOf(DeployConstants.MAX_RANGE_DAYS) }
+                    new List<String>{ String.valueOf(DeployConstants.DAYS_MAX) }
                 ));
             }
         }
@@ -67,7 +67,7 @@ public with sharing class DeployValidator {
 
         DeploySetup__c cfg = DeploySetupRepository.getRawConfig();
         if (cfg != null) {
-            validateNamedCredential(cfg.NamedCredential__c);
+            validateNamedCredential(cfg.NamedCredential__c, cfg.SessionId__c);
         }
 
         if (!config.isEnabled && DeploySetupRepository.getActiveDeployJobs().isEmpty()) {
@@ -93,8 +93,8 @@ public with sharing class DeployValidator {
      * @param batchSize Batch size.
      * @param namedCredential Named credential developer name.
      */
-    public static void validateAdvancedSettings(Integer batchSize, String namedCredential) {
-        validateNamedCredential(namedCredential);
+    public static void validateAdvancedSettings(Integer batchSize, String namedCredential, Boolean sessionId) {
+        validateNamedCredential(namedCredential, sessionId);
 
         if (
             batchSize == null ||
@@ -126,6 +126,7 @@ public with sharing class DeployValidator {
     /**
      * @description Asserts no DeployRequestBatch is currently running.
      */
+    @SuppressWarnings('PMD.ApexCRUDViolation')
     public static void assertNoSyncInProgress() {
         List<AsyncApexJob> jobs = [
             SELECT Id
@@ -139,41 +140,38 @@ public with sharing class DeployValidator {
     }
 
     /**
-     * @description Validates existence of NamedCredential.
-     * @param nc Named credential developer name.
+     * @description Validates that at least one authentication method is configured: either a valid NamedCredential or SessionId flag set to true.
+     * @param nc Named credential developer name. Can be null if usingSessionId is true.
+     * @param isUsingSessionId Whether SessionId is being used as the authentication method.
      */
-    public static void validateNamedCredential(String nc) {
+    @SuppressWarnings('PMD.ApexCRUDViolation')
+    public static void validateNamedCredential(String nc, Boolean isUsingSessionId) {
         if (Test.isRunningTest() && !validateNCInTest) {
             return;
         }
 
-        if (String.isBlank(nc)) {
+        Boolean hasNamedCredential = !String.isBlank(nc);
+
+        if (!isUsingSessionId && !hasNamedCredential) {
             throw new AuraHandledException(DeployConstants.ERR_NC_BLANK);
         }
 
-        Integer count = [
-            SELECT COUNT()
-            FROM NamedCredential
-            WHERE DeveloperName = :nc AND NamespacePrefix = null
-        ];
+        if (hasNamedCredential) {
+            Integer count = [
+                SELECT COUNT()
+                FROM NamedCredential
+                WHERE DeveloperName = :nc AND NamespacePrefix = null
+            ];
 
-        if (count == 0) {
-            throw new AuraHandledException(String.format(
-                DeployConstants.ERR_NC_MISSING,
-                new List<String>{ nc }
-            ));
+            if (count == 0) {
+                throw new AuraHandledException(String.format(
+                    DeployConstants.ERR_NC_MISSING,
+                    new List<String>{ nc }
+                ));
+            }
         }
     }
 
-    /**
-     * @description Asserts that NamedCredential is not blank.
-     * @param namedCredential Named credential developer name.
-     */
-    public static void assertNamedCredential(String namedCredential) {
-        if (String.isBlank(namedCredential)) {
-            throw new IllegalArgumentException(DeployConstants.ERR_NAMED_CREDENTIAL_BLANK);
-        }
-    }
 
     private static void assertNotBlank(String val, String message) {
         if (String.isBlank(val)) {
