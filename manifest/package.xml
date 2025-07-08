@@ -30,6 +30,10 @@
 		<name>ApexClass</name>
 	</types>
 	<types>
+		<members>*</members>
+		<name>CompactLayout</name>
+	</types>
+	<types>
 		<members>LugDeployTracker</members>
 		<name>CustomApplication</name>
 	</types>
@@ -115,6 +119,7 @@
 		<members>DeploySetup__c.RetrieveComponents__c</members>
 		<members>DeploySetup__c.RetrieveIntermediateStates__c</members>
 		<members>DeploySetup__c.RetrieveTests__c</members>
+		<members>DeploySetup__c.SessionId__c</members>
 		<members>DeploySetup__c.StartTime__c</members>
 		<name>CustomField</name>
 	</types>
@@ -139,7 +144,7 @@
 	</types>
 	<types>
 		<members>LugDeployTrackerDashBoardsFolder</members>
-		<members>LugDeployTrackerDashBoardsFolder/VhJjdxXZhcGnevqpfSEWVMIzSahDFG</members>
+		<members>LugDeployTrackerDashBoards/LugDeployTrackerDashBoards</members>
 		<name>Dashboard</name>
 	</types>
 	<types>
@@ -160,12 +165,10 @@
 		<members>deployAdvancedSettings</members>
 		<members>deployErrorHandler</members>
 		<members>deployHeader</members>
-		<members>deployResultViewer</members>
 		<members>deployScheduleSettings</members>
 		<members>deploySettingsApp</members>
 		<members>deploySyncSettings</members>
 		<members>deployToastService</members>
-		<members>errorHandler</members>
 		<name>LightningComponentBundle</name>
 	</types>
 	<types>
@@ -186,7 +189,8 @@
 		<name>ListView</name>
 	</types>
 	<types>
-		<members>DeployAdminAccess</members>
+		<members>DeployAdminAccessNC</members>
+		<members>DeployAdminAccessSID</members>
 		<members>DeployAppAccess</members>
 		<name>PermissionSet</name>
 	</types>
@@ -208,5 +212,5 @@
 		<members>deployToolingApiResponse</members>
 		<name>StaticResource</name>
 	</types>
-	<version>63.0</version>
+	<version>64.0</version>
 </Package>

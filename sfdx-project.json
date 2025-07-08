@@ -15,6 +15,16 @@
   "sourceApiVersion": "63.0",
   "packageAliases": {
     "LugDeployTracker": "0HoQy0000000iaXKAQ",
-    "LugDeployTracker@0.1.0-1": "04tQy0000009mDVIAY"
+    "LugDeployTracker@0.1.0-1": "04tQy0000009mDVIAY",
+    "LugDeployTracker@0.1.0-3": "04tQy000000A501IAC",
+    "LugDeployTracker@0.1.0-4": "04tQy000000A6ovIAC",
+    "LugDeployTracker@0.1.0-5": "04tQy000000ADyTIAW",
+    "LugDeployTracker@0.1.0-6": "04tQy000000AEw9IAG",
+    "LugDeployTracker@0.1.0-7": "04tQy000000AF5pIAG",
+    "LugDeployTracker@0.1.0-8": "04tQy000000AFFVIA4",
+    "LugDeployTracker@0.1.0-9": "04tQy000000AFSPIA4",
+    "LugDeployTracker@0.1.0-10": "04tQy000000AFYrIAO",
+    "LugDeployTracker@0.1.0-11": "04tQy000000AFc5IAG",
+    "LugDeployTracker@0.1.0-12": "04tQy000000AJKjIAO"
   }
 }
