@@ -19,7 +19,7 @@ You can install **Lug Deploy Tracker** in your Salesforce org using one of the f
 
 You **must enable one of the following authentication methods** before using the app:
 
-### Option 1: Session ID authentication (⚠️ uses Modify All Data permission)
+### Option 1: Session ID authentication ( ⚠️ uses Modify All Data permission)
 
 - Assign the permission set **DeployAdminAccessSID** to the user.
 - Select “Use Session ID” in the advanced settings.
