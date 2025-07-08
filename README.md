@@ -22,7 +22,7 @@ You **must enable one of the following authentication methods** before using the
 ### Option 1: Session ID authentication ( ⚠️ uses Modify All Data permission)
 
 - Assign the permission set **DeployAdminAccessSID** to the user.
-- Select “Use Session ID” in the advanced settings.
+- Select **“Use Session ID”** in the advanced settings.
 
 ### Option 2: Named Credential authentication (recommended, least privilege)
 
